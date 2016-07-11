@@ -1,0 +1,148 @@
+
+.small-text{
+	display:inline-block;
+	font-size:14px;
+	color:$my_white;
+	text-align:center;
+	line-height:1em;
+	padding-right:10px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.navigation-block{
+	display:block;
+	height:100%;
+}
+
+.nav-icon {
+	margin:0 30px 0 0;
+	svg{
+		circle,
+		polygon,
+		rect,
+		path{
+			fill:rgba(0,0,0,1);
+		}
+		&:hover{
+			circle,
+			polygon,
+			rect,
+			path{
+				fill:rgba(0,0,0,1);
+			}
+		}	
+	}
+}
+
+.nav-bg {
+  z-index: 9;
+  width:100%;
+  position:fixed;
+  text-align: center;
+  // color:$my_white;
+  background-color: $my_purple;
+	
+	ul.nav.navbar-nav{
+		li{
+			border-top:2px solid transparent;
+			&:hover{
+				a{
+					background-color:transparent;
+				}
+			}
+		}
+
+		li.active {
+			border-top:2px solid white;	
+		}
+	}
+
+	.nav-item,
+	.search-bar,
+	.version{
+		display:inline-block;
+	}
+	.version{
+		float:right;
+	}
+
+	.nav-item {
+		padding:0 30px;
+		float:left;
+		text-align:center;
+		line-height:3.5em;
+		border-top:2px solid transparent;
+	}
+
+	a {
+		@include link-style;
+	}
+
+	.prefered-name{
+		line-height: 3.5em;
+    	border-top: 2px solid transparent;
+	}
+
+  .search-bar {
+  	line-height:2.5em;
+  	display:inline-block;
+
+		input{
+		  line-height: 1.8em;
+		  padding:3px 10px;
+		  background-color:white;
+		  // color:$my_black;
+	      border: none;
+		}
+		.pull-jiras{
+			cursor: pointer;
+			// color: white;
+			margin-left: 20px;
+			display: inline-block;
+		}
+
+  	.search-label{
+  		margin-left: 10px;
+	    margin-right: 10px;
+	    line-height: 2em;
+	    border: none;
+	    outline: none;
+  		display: inline-block;
+			padding:0 15px;
+  	}
+
+  	button{
+			// @include button-style;
+			border-top:2px solid transparent;	
+  		line-height:3.5em;
+  	}
+
+		.active-button {
+			border-top:2px solid white;	
+		}	
+	}
+
+	.version {
+	  line-height:3.5em;
+	  // color: rgba(225, 225, 225, 0.3);
+	}
+
+	.top-nav {
+	  position: fixed;
+	  top: 0;
+	  width: inherit;
+	  border-bottom: 0.1em solid black;
+	  z-index: 10;
+	  vertical-align: middle;
+	  background-color: white;
+	}
+}
+
+headernav{
+	  position: fixed;
+    background: transparent;
+    bottom: 5px;
+    right: 5px;
+    z-index: 10;
+}
+  

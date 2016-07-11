@@ -1,0 +1,537 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"active",
+				"active_bars"
+			],
+			[
+				"JiraAccounts",
+				"jira_accounts"
+			],
+			[
+				"star",
+				"startD"
+			],
+			[
+				"return",
+				"returnTasks"
+			],
+			[
+				"url",
+				"url_prot"
+			],
+			[
+				"translat",
+				"translateX"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"heade",
+				"header-height"
+			],
+			[
+				"banner",
+				"bannerImage"
+			],
+			[
+				"bacgkround",
+				"background-size"
+			],
+			[
+				"scrll",
+				"scrollDistance"
+			],
+			[
+				"scroll",
+				"scrollDistance"
+			],
+			[
+				"contain",
+				"container"
+			],
+			[
+				"container",
+				"containerHeight"
+			],
+			[
+				"ep",
+				"episode_audio_file"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"win",
+				"windowWidth"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 163.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"package control",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Preferences: Settings - Default"
+			],
+			[
+				"scss",
+				"Set Syntax: CSS"
+			]
+		],
+		"width": 417.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"theme = PREDAWN"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/garrettculos/Sites/jiragation",
+		"/Users/garrettculos/Sites/jiragation/app/common",
+		"/Users/garrettculos/Sites/jiragation/app/common/controllers",
+		"/Users/garrettculos/Sites/jiragation/app/sass/fonts"
+	],
+	"file_history":
+	[
+		"/Users/garrettculos/Sites/jiragation/app/app.js",
+		"/Users/garrettculos/Sites/jiragation/app/common/controllers/taskList.js",
+		"/Users/garrettculos/Sites/jiragation/app/common/controllers/task.js",
+		"/Users/garrettculos/Sites/jiragation/models/user.js",
+		"/Users/garrettculos/Sites/jiragation/app/common/account/settings.html",
+		"/Users/garrettculos/Sites/jiragation/app/common/controllers/user.js",
+		"/Users/garrettculos/Sites/jiragation/server.js",
+		"/Users/garrettculos/Sites/jiragation/app/index.html",
+		"/Users/garrettculos/Sites/jiragation/models/jiragation.js",
+		"/Users/garrettculos/Sites/jiragation/routes/users.js",
+		"/Users/garrettculos/Sites/jiragation/app/common/task-list/taskList_test.js",
+		"/Users/garrettculos/Sites/jiragation/app/common/controllers/accounts.js",
+		"/Users/garrettculos/Sites/jiragation/models/accounts.js",
+		"/Users/garrettculos/Sites/jiragation/app/common/task-list/taskList.html",
+		"/Users/garrettculos/Sites/jiragation/app/common/controllers/logs.js",
+		"/Users/garrettculos/Sites/jiragation/app/sass/_task_list.scss",
+		"/Users/garrettculos/Sites/jiragation/routes/jira.js",
+		"/Users/garrettculos/Sites/jiragation/app/common/account/account.html",
+		"/Users/garrettculos/Sites/jiragation/routes/accounts.js",
+		"/Users/garrettculos/Sites/jiragation/app/common/logs/logs.html",
+		"/Users/garrettculos/Sites/jiragation/app/common/logs/log_bar.html",
+		"/Users/garrettculos/Sites/jiragation/app/sass/_navbar.scss",
+		"/Users/garrettculos/Sites/jiragation/app/sass/_base.scss",
+		"/Users/garrettculos/Sites/jiragation/app/sass/_logs.scss",
+		"/Users/garrettculos/Sites/jiragation/app/common/controllers/headerNav.js",
+		"/Users/garrettculos/Sites/jiragation/app/common/headerNav.html",
+		"/Users/garrettculos/Sites/jiragation/app/img/svg/ic_update_black_24px.svg",
+		"/Users/garrettculos/Sites/jiragation/app/sass/_variables.scss",
+		"/Users/garrettculos/Sites/jiragation/app/img/svg/ic_timeline_black_24px.svg",
+		"/Users/garrettculos/Sites/jiragation/app/img/svg/ic_home_black_24px.svg",
+		"/Users/garrettculos/Sites/jiragation/app/sass/_mixins.scss",
+		"/Users/garrettculos/Sites/jiragation/app/sass/_icons.scss",
+		"/Users/garrettculos/Sites/jiragation/app/img/svg/view_list.svg",
+		"/Users/garrettculos/Sites/jiragation/app/img/svg/settings.svg",
+		"/Users/garrettculos/Sites/jiragation/routes/taskManager.js",
+		"/Users/garrettculos/Sites/jiragation/models/time_sheet.js",
+		"/Users/garrettculos/Sites/jiragation/app/img/svg/test.svg",
+		"/Users/garrettculos/Sites/jiragation/app/img/svg/refresh.svg",
+		"/Users/garrettculos/Sites/jiragation/app/img/svg/menu.svg",
+		"/Users/garrettculos/Sites/jiragation/app/img/svg/close.svg",
+		"/Users/garrettculos/Sites/jiragation/bower_components/material-design-icons/navigation/svg/design/ic_unfold_less_24px.svg",
+		"/Users/garrettculos/Sites/jiragation/bower_components/material-design-icons/navigation/svg/design/ic_refresh_24px.svg",
+		"/Users/garrettculos/Sites/jiragation/bower_components/material-design-icons/maps/1x_web/ic_local_atm_white_36dp.png",
+		"/Users/garrettculos/Sites/jiragation/bower_components/angular-material/angular-material.scss",
+		"/Users/garrettculos/Sites/jiragation/app/sass/main.scss",
+		"/Users/garrettculos/Sites/jiragation/routes/logs.js",
+		"/Users/garrettculos/Sites/jiragation/app/common/task-list/filters.js",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/podcasts.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/font/_font.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/bower_components/bootstrap-sass/CHANGELOG.md",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/js/main.js",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/media/_podcast.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/main.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/contact/_contact.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/_base.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/header/_navbar.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/about.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/about/_about.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/c629728431df377cd1688790a6609cb36229638b/_mixins.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/_helpers.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/modules/_mixins.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/e17aeefb0a6b98d8683e19535e38b67e4be4647d/_about.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/85bfe39ac188191eb12d674f6b72c0b22d5831a3/_contact.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/97131aa333b767a2bbe8c264c871a1d252e29bc9/_helpers.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/decks.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/contact.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/home.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/header.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/footer.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/icons/_icons.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/_side_nav.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/nav.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/modules/_variables.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/modules/_bootstrap_overrides.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/Gruntfile.js",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/single-podcasts_tcobo.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/left-nav.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_navs.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/wpcf7-overrides/_wpcf7_overrides.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/_home.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/footer/_footer.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/c629728431df377cd1688790a6609cb36229638b/_variables.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/footer/_sub_form.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/ea3b6cb0d379f3211f041e1358f89ee460ccfdae/_footer.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/top_nav.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/ea3b6cb0d379f3211f041e1358f89ee460ccfdae/_sub_form.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/97131aa333b767a2bbe8c264c871a1d252e29bc9/_side_nav.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/8c08826f0577041b069b3508f4c13dc85bcfce37/_navbar.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/side_nav.php",
+		"/Users/garrettculos/Sites/hlander/.gitignore",
+		"/Users/garrettculos/Sites/hlander/README.md",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.gitignore",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/functions.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/97131aa333b767a2bbe8c264c871a1d252e29bc9/_index.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/.sass-cache/97131aa333b767a2bbe8c264c871a1d252e29bc9/_home.scssc",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/single-deck_post.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/index.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/meta.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/people_poop.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/people_business.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/symbols.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/three.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/transport.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/facebook.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/circle.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/folder.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/alert.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/book.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/business.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/tool.svg",
+		"/Users/garrettculos/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/garrettculos/Sites/hlander/.htaccess",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/single-article.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/single-podcast.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/single-podcasts.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/single-monday_night_meta.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/articles.php",
+		"/Users/garrettculos/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/garrettculos/Library/Application Support/Sublime Text 3/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/youtube.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/twitch.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/single-news.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/plugins/jetpack/modules/subscriptions.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/plugins/jetpack/modules/module-info.php",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/sass/partials/_index.scss",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/twitch.svg",
+		"/Users/garrettculos/Sites/hlander/wp-content/themes/hlander/assets/img/svg/podcast.svg"
+	],
+	"find":
+	{
+		"height": 54.0
+	},
+	"find_in_files":
+	{
+		"height": 154.0,
+		"where_history":
+		[
+			"",
+			"<open files>",
+			"open files",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"currentUser",
+			"$currentUser",
+			"myApp.user",
+			"muApp.user",
+			"accountsController",
+			"userController",
+			"taskController",
+			"userController",
+			"=+",
+			"setGivenName",
+			"settings",
+			"account.ht",
+			"save",
+			"scroll",
+			"<<<",
+			"<<<\n",
+			"<<<",
+			"modifyTaskList",
+			"rootSc",
+			"rootScop",
+			"$rootS",
+			"$rootScope",
+			"modifyTaskList",
+			"user_accounts",
+			"console.log",
+			"$q",
+			"acct",
+			"console",
+			"console.log",
+			"taskListToArray",
+			"getlogs",
+			"getTime",
+			"md-datepicker-input",
+			"controller",
+			"color",
+			"layout",
+			"background-color:",
+			"background-color",
+			"bckground-color",
+			"md-content",
+			"background-color",
+			"md-content",
+			"md-content.md-default-theme",
+			"md-content.md-default-theme, md-content",
+			"md-content",
+			"background-color",
+			"md-content",
+			"border",
+			"border-top",
+			"nav",
+			"task.fields.created",
+			"predicate",
+			"async.",
+			"async",
+			"console.log",
+			"sectin-title-font",
+			"normal-font-family",
+			"page-conte",
+			"300",
+			"sidebar-wrapp",
+			"sidear-wrapp",
+			"m-body-font",
+			"hamb",
+			"$blue,",
+			"999",
+			"social",
+			"padding-left",
+			"page-con",
+			"lib",
+			"color_rangoon_green_approx",
+			"config.r",
+			"$border-radius-base",
+			"$nav-tabs-border-color",
+			"nav-tabs-link-hover-border-color",
+			"navbar",
+			"nav-tabs",
+			"nav-tabs-justified-active-link-border-color",
+			"nav-tabs-active-link",
+			"my-black",
+			"my-block",
+			"my-white",
+			"my_white",
+			"off-white",
+			"mid-white",
+			"dark-red",
+			"light-red",
+			"light-blue",
+			"lighter-grey",
+			"light-grey",
+			"dark-grey",
+			"blur",
+			"blure",
+			"class=\"title\"",
+			"m-title-font",
+			"m-sectin-title-font",
+			"m-section-title-font",
+			"post-container",
+			"entry-content",
+			"h1",
+			"upload",
+			"$post_meta",
+			"icon i",
+			"hl-sub-",
+			"hl-sub-forum",
+			"hl-sub-form",
+			"jetpack_subscription_form",
+			"hl-left-container",
+			"icons",
+			"icons ",
+			"copy",
+			"facebook",
+			"navbar ",
+			"navbar",
+			"nav-main",
+			"navbar-nav",
+			"navbar",
+			"navbar-navnavbar",
+			"navbar-nav",
+			"navbar ",
+			"navbar",
+			"navbar-nav",
+			"navbar-fixed",
+			"navbar",
+			"main-nav",
+			"navbar-nav",
+			"background-color",
+			"$off-white-light",
+			"carousel-control"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"accountsController",
+			"taskController",
+			"modify_task_list",
+			"section-title-font",
+			"my_black",
+			"my_white",
+			"off_white",
+			"mid_white",
+			"dark_red",
+			"light_red",
+			"light_blue",
+			"lighter_grey",
+			"light_grey",
+			"dark_grey",
+			"m-title-font-hover",
+			"m-sectin-title-font-hover",
+			"m-section-title-font-hover",
+			"$mid-white",
+			"grey",
+			"$light-grey"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 51.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "jiragation.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 250.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

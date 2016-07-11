@@ -1,0 +1,83 @@
+.validation-messages {
+  font-size: 12px;
+  margin: 10px 0 0 25px; 
+}
+
+.panel-shadow {
+	@include box-shadow(rgba(20,20,20,0.3) 0 0 5px);
+}
+
+// angular md overrieds
+	
+	// date selector overrides
+	#logs{
+		md-icon {
+			color:black;
+			svg{
+				path{
+					fill:rgba(0, 0, 0, 0.870588);
+				}
+			}
+		}
+	}
+	
+	.md-default-theme .md-calendar-date.md-calendar-selected-date .md-calendar-date-selection-indicator, 
+	.md-calendar-date.md-calendar-selected-date .md-calendar-date-selection-indicator, 
+	.md-default-theme .md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator, 
+	.md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator {
+		color:$my_white;
+	}
+
+	input.md-datepicker-input{
+		textarea, 
+		select{
+			color:rgba(0, 0, 0, 0.870588);
+		}	
+	}
+	.md-default-theme .md-calendar-date-selection-indicator:hover, 
+	.md-calendar-date-selection-indicator:hover{
+		background-color:transparent;
+		border:1px solid $my_purple;
+	}
+
+	// nav overrieds
+	md-toolbar.md-default-theme:not(.md-menu-toolbar), 
+	md-toolbar:not(.md-menu-toolbar),
+	md-toolbar.md-default-theme:not(.md-menu-toolbar) .md-button:not(.md-raised), 
+	md-toolbar:not(.md-menu-toolbar) .md-button:not(.md-raised),
+	md-checkbox.md-default-theme:not([disabled]).md-primary.md-checked .md-icon:after, 
+	md-checkbox:not([disabled]).md-primary.md-checked .md-icon:after {
+		border-color:$my_white;
+		color:$my_white;
+	}
+
+	md-dialog .md-actions, 
+	md-dialog md-dialog-actions {
+		@include box-shadow(rgba(black,0.5) 0 0 6px);
+	}
+
+	md-toolbar{
+		@include box-shadow(rgba(black,0.5) 0 0 6px);
+	}
+	
+	md-dialog-actions{
+		height:50px;
+		min-height:50px;
+	}
+	
+	md-toolbar{
+		min-height:50px;
+		.md-toolbar-tools{
+			height:50px;
+			max-height:50px;
+		}
+	}
+	md-dialog {
+		min-width:550px;
+		md-dialog-content{
+			padding:30px 10px;
+		}
+	}
+	.md-fab .md-button.md-icon-button{
+		margin:0;
+	}

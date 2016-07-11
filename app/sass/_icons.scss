@@ -1,0 +1,24 @@
+svg{
+	display:inline-block;
+	width:25px;
+	font-size:inherit;
+  vertical-align: middle;
+
+	circle,
+	polygon,
+	rect,
+	path{
+		fill:$my_white;
+	}
+	&:hover{
+		circle,
+		polygon,
+		rect,
+		path{
+			fill:$my_white_alt;
+		}
+	}	
+}
+.disabled{
+	display:none;
+}

@@ -1,0 +1,32 @@
+#popup{
+	text-align:center;
+	position:fixed;
+	top:5px;
+	right:5px;
+	float:right;
+	img{
+		border-radius:10px;
+	}
+}
+.main-content{
+	.head {
+		min-height: 56px;
+		font-weight:600;
+		padding-top:20px;
+		border-bottom:1px solid rgba(1,1,1,0.6);
+		div{
+			text-align: center;
+		}
+	}	
+	.body-row{
+		min-height:56px;
+		padding-top:20px;
+		border-bottom:1px solid rgba(1,1,1,0.6);
+		
+		&pick-cell{
+			color: rgba(0,0,0,.87);
+	    font-size: 13px;
+	    border-top: 1px rgba(0,0,0,.12) solid;
+		}
+	}
+}
