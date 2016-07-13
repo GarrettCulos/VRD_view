@@ -3,54 +3,51 @@
 <!-- Filter -->
 
 <md-content id="main">
+	<div ng-show="!draft" flex style="text-align:center;"> 
+		No GoogleSheets Available 
+	</div>
+	<draft ng-show="draft" flex="80" layout="row" layout-style="center strech">
+		<md-data-table-container>
+			<table md-table md-row-select style="height:100%;">
+				<thead md-head style="width:100%; display:block;">
+					<tr md-row>
+						<th md-column>Num</th>
+						<th md-column ng-repeat="player in draft.players"> {{player}} </th>	
+					</tr>
+				</thead>
+				<tbody md-body ng-controller="cardAutoComplete as ctrl" style="display:block; width: 100%; overflow: auto;">
+					<tr md-row ng-repeat="(key, row) in draft.picks" >
+						<td md-cell>{{key+1}}</td>
+						<td md-cell ng-click="viewCard($event, key, seatNumber)" ng-repeat="(seatNumber, pick) in row">
+							{{pick}}
+							<md-autocomplete
+							 ng-if="settings.seat_number == seatNumber && key == -1"
+							 md-selected-item="ctrl.selectedItem"
+							 md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+							 md-search-text="ctrl.searchText"
+							 md-selected-item-change="ctrl.selectedItemChange(item)"
+							 md-items="item in ctrl.querySearch(ctrl.searchText)"
+							 md-item-text="item.display"
+							 md-min-length="0"
+							 placeholder="Choose a card">
+						        <md-item-template>
+									<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+						        </md-item-template>
+					        	<md-not-found>
+					        		No card matching "{{ctrl.searchText}}" was found.
+					        	</md-not-found>
+					      	</md-autocomplete>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-data-table-container>
+	</draft>
 
-	<div class="main-content" layout="row" layout-align="center" flex="80">
-		<div ng-show="!draft" flex style="text-align:center;"> 
-			No GoogleSheets Available 
-		</div>
-		<div ng-show="draft" flex>
-			<md-data-table-container>
-				<table md-table md-row-select style="margin-top:56px;">
-					<thead md-head flex="80" style="position:fixed; top:0; background-color:white;">
-						<tr md-row>
-							<th md-column>#</th>
-							<th md-column ng-repeat="player in draft.players"> {{player}} </th>	
-						</tr>
-					</thead>
-					<tbody md-body ng-controller="cardAutoComplete as ctrl">
-						<tr md-row ng-repeat="(key, row) in draft.picks">
-							<td md-cell>{{key+1}}</td>
-							<td md-cell ng-click="viewCard($event, key, seatNumber)" ng-repeat="(seatNumber, pick) in row">
-								{{pick}}
-								<md-autocomplete
-								 ng-if="settings.seat_number == seatNumber && key == -1"
-								 md-selected-item="ctrl.selectedItem"
-								 md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-								 md-search-text="ctrl.searchText"
-								 md-selected-item-change="ctrl.selectedItemChange(item)"
-								 md-items="item in ctrl.querySearch(ctrl.searchText)"
-								 md-item-text="item.display"
-								 md-min-length="0"
-								 placeholder="Choose a card">
-							        <md-item-template>
-										<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-							        </md-item-template>
-						        	<md-not-found>
-						        		No card matching "{{ctrl.searchText}}" was found.
-						        	</md-not-found>
-						      	</md-autocomplete>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</md-data-table-container>
-		</div>
-	</div>  
-
-	<div id="popup" flex="20">
+	<card-dragger id="popup" flex="20">
 		<div ng-if="cardView">
 			<img ng-if="cardImage != 'https://image.deckbrew.com/mtg/multiverseid/0.jpg'" src="{{cardImage}}" alt="{{cardView.name}}">
-			<div ng-if="cardImage == 'https://image.deckbrew.com/mtg/multiverseid/0.jpg'"">
+			<div ng-if="cardImage == 'https://image.deckbrew.com/mtg/multiverseid/0.jpg'">
 				<div>{{cardView.name}}</div>
 				<div>{{cmc}}</div>	
 				<div>{{cardView.colors}}</div>
@@ -61,7 +58,8 @@
 		<div ng-if="!cardView">
 			No Cards
 		</div>
-	</div>
-
+	</card-dragger>
 </md-content>
+
+
 

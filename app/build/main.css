@@ -37435,36 +37435,62 @@ headernav {
 }
 
 /* line 1, ../sass/_vrd_view.scss */
-#popup {
+card-dragger {
+  background-color: white;
+  max-width: 225px;
+  border-radius: 10px;
+  position: absolute;
+  cursor: pointer;
   text-align: center;
-  position: fixed;
-  top: 5px;
-  right: 5px;
-  float: right;
 }
-/* line 7, ../sass/_vrd_view.scss */
-#popup img {
+/* line 8, ../sass/_vrd_view.scss */
+card-dragger img {
   border-radius: 10px;
 }
 
-/* line 12, ../sass/_vrd_view.scss */
-.main-content .head {
-  min-height: 56px;
-  font-weight: 600;
-  padding-top: 20px;
-  border-bottom: 1px solid rgba(1, 1, 1, 0.6);
+/* line 13, ../sass/_vrd_view.scss */
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
 }
+
 /* line 17, ../sass/_vrd_view.scss */
-.main-content .head div {
-  text-align: center;
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
 }
+
 /* line 21, ../sass/_vrd_view.scss */
-.main-content .body-row {
-  min-height: 56px;
-  padding-top: 20px;
-  border-bottom: 1px solid rgba(1, 1, 1, 0.6);
+::-webkit-scrollbar-track {
+  display: none;
+  width: 0;
 }
-/* line 26, ../sass/_vrd_view.scss */
-.main-content .body-rowpick-cell {
-  text-align: center;
+
+/* line 25, ../sass/_vrd_view.scss */
+::-webkit-scrollbar-track-piece {
+  display: none;
+  width: 0;
+}
+
+/* line 29, ../sass/_vrd_view.scss */
+::-webkit-scrollbar-thumb {
+  display: none;
+  width: 0;
+}
+
+/* line 33, ../sass/_vrd_view.scss */
+::-webkit-scrollbar-corner {
+  display: none;
+  width: 0;
+}
+
+/* line 37, ../sass/_vrd_view.scss */
+::-webkit-resizer {
+  display: none;
+  width: 0;
+}
+
+/* line 42, ../sass/_vrd_view.scss */
+md-content {
+  position: relative;
 }

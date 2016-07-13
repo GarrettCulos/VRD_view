@@ -314,4 +314,75 @@ angular.module('myApp', [
             return (self.cardsNames.indexOf(lowercaseQuery) === 0);
         };
     }
+}])
+.directive('draft', function($window) {
+    return function (scope, element) {
+        var w = angular.element($window);
+        var setHeight = function() {
+            angular.element('draft').css({'height':w.height()});
+        }
+
+        w.trigger('resize', function () {
+            setHeight()
+        });
+
+        setHeight()
+    }
+})
+.directive('tbody', function($window) {
+    return function(scope, element){
+        var w = angular.element($window);
+        var thead = angular.element('thead');
+
+        var setHeight = function() {
+            angular.element('tbody').css({'height':(w.height()-thead.height())});
+        }
+
+        w.trigger('resize', function () {
+            setHeight()
+        });
+
+        setHeight()
+    }
+})
+.directive('cardDragger', ['$document', function($document) {
+  return {
+    link: function(scope, element, attr) {
+      var startX = 0, startY = 0, x = 0, y = 0;
+      var w_width =  angular.element(window).width();
+      console.log(w_width);
+
+      element.css({
+       position: 'absolute',
+       cursor: 'pointer',
+       top:x,
+       right:y,
+      });
+
+      element.on('mousedown', function(event) {
+        // Prevent default dragging of selected content
+        event.preventDefault();
+        startX = event.pageX - x;
+        startY = event.pageY - y;
+        console.log(startX)
+        console.log(startY);
+        $document.on('mousemove', mousemove);
+        $document.on('mouseup', mouseup);
+      });
+
+      function mousemove(event) {
+        y = event.pageY - startY;
+        x = event.pageX - startX;
+        element.css({
+          top: y + 'px',
+          right:  -x + 'px'
+        });
+      }
+
+      function mouseup() {
+        $document.off('mousemove', mousemove);
+        $document.off('mouseup', mouseup);
+      }
+    }
+  }
 }]);
