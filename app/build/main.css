@@ -37494,3 +37494,14 @@ card-dragger img {
 md-content {
   position: relative;
 }
+
+/* line 45, ../sass/_vrd_view.scss */
+.md-autocomplete-suggestions-container.md-default-theme li .highlight,
+.md-autocomplete-suggestions-container li .highlight {
+  color: red;
+}
+
+/* line 49, ../sass/_vrd_view.scss */
+.pick {
+  text-align: center;
+}

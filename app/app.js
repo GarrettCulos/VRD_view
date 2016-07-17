@@ -23,6 +23,31 @@ angular.module('myApp', [
     	templateUrl: 'common/404.html',
     });
 }])
+.run(function($http, $q, $rootScope) {
+    $rootScope.google_api_key = 'AIzaSyB-9nVkiHEVV79h74o_8YMMBXMLKG1PvCY';
+
+    $rootScope.settings = {
+        'seat_number': 2,
+        'googleSheetsId':'1QsChUjmQrzyURwWAUtU61EziggAxuG3WO2gbXndRlKU',
+        'spectator': false
+    }
+    $http.get('AllCards.json').then(function(res){
+        var cards = {'data' : res.data, 'names':[]}; 
+        filterCardObject(cards).then(function(res){
+            $rootScope.cardsNames = res.names;
+            $rootScope.cards = res
+        });
+    });
+
+    function filterCardObject(obj){
+        var deferred = $q.defer();
+        angular.forEach(obj.data ,function(card ,key){
+            obj.names.push(card.name)
+            deferred.resolve(obj)
+        });
+        return deferred.promise;
+    } 
+})
 
 .config(function ($mdThemingProvider) {
     var customPrimary = {
@@ -103,8 +128,12 @@ angular.module('myApp', [
        .backgroundPalette('customBackground')
 })
 
-.controller('AppCtrl',['$scope', '$http', '$q', '$mdMedia', '$mdDialog', function($scope, $http, $q, $mdMedia, $mdDialog) {
+.controller('AppCtrl',['$scope', '$rootScope', '$http', '$q', '$mdMedia', '$mdDialog', '$interval', function($scope, $rootScope, $http, $q, $mdMedia, $mdDialog, $interval) {
    
+
+    $scope.settings = $rootScope.settings;
+    $scope.draft_player = $rootScope.draft_player;
+
     // --------------------------------------------- //
     //                  Settings Popup               //
     // --------------------------------------------- //
@@ -113,16 +142,10 @@ angular.module('myApp', [
         $scope.status = '  ';
         $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
 
-        $scope.settings = {
-            'seat_number': 2,
-            'googleSheetsId':'1IUKyVd3REbUlfw0d-0cg7m1mDR-tE7vMldzm-CCyxnk',
-            'spectator': false
-        }
-
         $scope.showSettings = function(ev) {
             var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
             $mdDialog.show({
-                controller: DialogController,
+                controller: SettingsDialogController,
                 templateUrl: 'common/views/settings.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
@@ -142,7 +165,12 @@ angular.module('myApp', [
             });
         };
 
-        function DialogController($scope, $mdDialog) {
+        function SettingsDialogController($scope, $rootScope, $mdDialog) {
+
+            $scope.seatNumber = $rootScope.settings.seat_number;
+            $scope.googleSheetsId = $rootScope.settings.googleSheetsId;
+            $scope.spectator = $rootScope.settings.spectator;
+
             $scope.hide = function() {
                 $mdDialog.hide();
             };
@@ -152,8 +180,8 @@ angular.module('myApp', [
             $scope.save = function(answer) {
                 $mdDialog.hide(answer);
 
-                $scope.settings = {
-                    'seat_number': $scope.seat_number,
+                $rootScope.settings = {
+                    'seat_number': $scope.seatNumber,
                     'googleSheetsId': $scope.googleSheetsId,
                     'spectator': $scope.spectator
                 } 
@@ -161,12 +189,115 @@ angular.module('myApp', [
         }
 
     // --------------------------------------------- //
+    //                  Pick Popup                   //
+    // --------------------------------------------- //
+
+        // Show Settings Modal (see https://material.angularjs.org/latest/demo/dialog)
+        
+        $scope.showPickDialog = function(ev) {
+            var useFullScreen = $mdMedia('xs') && $scope.customFullscreen;
+            $mdDialog.show({
+                controller: PickDialogController,
+                templateUrl: 'common/views/pick.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: useFullScreen
+            })
+            .then(function(answer) {
+                $scope.status = 'Pick Chosen';
+            }, function() {
+                $scope.status = 'Pick Not Chosen';
+            });
+
+            $scope.$watch(function() {
+                return $mdMedia('xs') || $mdMedia('sm');
+            }, function(wantsFullScreen) {
+                $scope.customFullscreen = (wantsFullScreen === true);
+            });
+        };
+
+        function PickDialogController($scope, $rootScope, $mdDialog) {
+            // search function to match full text
+            $scope.localSearch = function(str) {
+                var matches = [];
+                $rootScope.cardsNames.forEach(function(card) {
+                    if (card.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) {
+                        matches.push(card);
+                    }
+                });
+                return matches;
+            };
+
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            $scope.submit = function(answer) {
+                var seatToSheet = ["A","B","C",'D','E','F','G','H','I','J','K'];
+                var seat = $rootScope.settings.seat_number;
+                var sheetId = $rootScope.settings.googleSheetsId;
+                var googleApiKey = $rootScope.google_api_key;
+                var sheetsRound = $rootScope.draft_round +1;
+                var sheetLocation = seatToSheet[seat]+sheetsRound;
+                console.log(googleApiKey);
+                var post_url = 'https://sheets.googleapis.com/v4/spreadsheets/'+sheetId+'/values/range?valueInputOption=RAW?key='+googleApiKey;
+                var payload = {
+                    range: "Sheet1!"+sheetLocation,
+                    majorDimension: "DIMENSION_UNSPECIFIED",
+                    values:[$scope.selectedItem]
+                };
+                $http({
+                  method: 'PUT',
+                  authorization: 'Basic '+ googleApiKey,
+                  url: post_url,
+                  contentType: 'application/json',
+                  body:payload
+                }).success(function(response) {
+                    console.log(response);
+                    $mdDialog.hide(answer);
+                }).error(function(response){
+                    $mdDialog.hide(answer);
+                });
+            
+                
+                // sent pick to sheets
+            };
+
+            $scope.viewCard = function(cardname){
+                $http.get('https://api.deckbrew.com/mtg/cards?name='+cardname).then(function(res){
+                    if(res.data.length == 1){
+                        var chosen_key =1000;
+                        angular.forEach(res.data[0].editions, function(editions, key){
+                            if(editions.set != "International Collector's Edition" && editions.set != "Collector's Edition" && editions.set != "Vintage Masters"){
+                                if(chosen_key > key){
+                                    $scope.cardImage = res.data[0].editions[res.data[0].editions.length-1].image_url;
+                                    chosen_key = key;
+                                }
+                            }
+                        });
+                    } else {
+                        angular.forEach(res.data, function(card,key){
+                            if(card.name == cardname){
+                                $scope.cardImage = res.data[key].editions[res.data[key].editions.length-1].image_url;
+                            }
+                        });
+                    }
+                });
+            }
+        }
+
+    // --------------------------------------------- //
     //           Google Sheets API Calls             //
     // --------------------------------------------- //
 
+
         // 1IUKyVd3REbUlfw0d-0cg7m1mDR-tE7vMldzm-CCyxnk
+        
         function getSheet(sheetId){
-            var api_key = 'AIzaSyB-9nVkiHEVV79h74o_8YMMBXMLKG1PvCY';
+            var api_key = $rootScope.google_api_key;
             var deferred = $q.defer();
             if(sheetId){
                 var url = 'https://sheets.googleapis.com/v4/spreadsheets/'+sheetId+'/values/Sheet1!B1:I48?key='+api_key;
@@ -178,44 +309,66 @@ angular.module('myApp', [
             return deferred.promise;
         }
 
-        $scope.$watch('settings.googleSheetsId', function(){
-            getSheet($scope.settings.googleSheetsId).then(function(response){
+        $interval(function(){
+            console.log('Interval Trigger: '+($scope.draft_player+1)+':'+($rootScope.settings.seat_number));
+
+            if( ($scope.draft_player+1) != $rootScope.settings.seat_number){
+                console.log('Not you');
+                getSheet($rootScope.settings.googleSheetsId).then(function(response){
+                    $scope.draft = response;
+                    $scope.draft.players = response.values[0];
+                    var picks = response.values.splice(1,response.values.length+1);
+                    $rootScope.draft_round = picks.length;
+                    $scope.draft_player = picks[picks.length-1].length;
+                    formatDraftPicks($scope.draft.players, picks);
+                });
+            }
+
+        }, 10000);
+
+        $rootScope.$watch('settings', function(){
+            console.log('Watch Sheets Triggered');
+            getSheet($rootScope.settings.googleSheetsId).then(function(response){
+                // change local settings
+                $scope.settings = $rootScope.settings;
                 $scope.draft = response;
                 $scope.draft.players = response.values[0];
-                $scope.draft.picks = response.values.splice(1,response.values.length+1);
+                var picks = response.values.splice(1,response.values.length+1);
+                $rootScope.draft_round = picks.length;
+                $scope.draft_player = picks[picks.length-1].length;
+                formatDraftPicks($scope.draft.players, picks);
+
             });
         },true);
 
-    // --------------------------------------------- //
-    //                 Card Database                 //
-    // --------------------------------------------- //
-            
-
-        function filterCardObject(obj){
-            var deferred = $q.defer();
-            angular.forEach(obj.data ,function(card ,key){
-                obj.names.push(card.name)
-                deferred.resolve(obj)
+        function formatDraftPicks(player_array, picks_array){
+            var numbPlayers = player_array.length;
+            var playerArray = Array.apply(null,  Array(numbPlayers)).map(String.prototype.valueOf,"");
+            var numbPicks = 45;
+            var pickArray = Array.apply(null,  Array(numbPicks)).map(String.prototype.valueOf,"");
+            $scope.draft.picks=picks_array;
+            angular.forEach( pickArray, function(pick, key1){
+                if($scope.draft.picks[key1] === undefined){
+                    $scope.draft.picks[key1] = playerArray;
+                }
+                else if($scope.draft.picks[key1].length < numbPlayers){
+                    angular.forEach( playerArray, function(player, key2){
+                        if($scope.draft.picks[key1][key2] === undefined){
+                            $scope.draft.picks[key1].push("");
+                        }
+                    });    
+                }
+                
             });
-            return deferred.promise;
         }
 
-        $http.get('AllCards.json').then(function(res){
-            var cards = {'data' : res.data, 'names':[]}; 
-            filterCardObject(cards).then(function(res){
-                $scope.cardsNames = res.names;
-                $scope.cards = res
-            });
-        });
+    // --------------------------------------------- //
+    //                 Card Database                 //
+    // --------------------------------------------- //       
 
         $scope.viewCard = function($event, key1, key2){
             var cardname = $scope.draft.picks[key1][key2];
-            $scope.cardView = $scope.cards.data[cardname];
-            
-            // angular.element(document).find('#popup').css({ 
-            //     // 'top': $event.clientY,
-            //     // 'left': $event.clientX
-            // });
+            $scope.cardView = $rootScope.cards.data[cardname];
 
             $http.get('https://api.deckbrew.com/mtg/cards?name='+cardname).then(function(res){
                 if(res.data.length == 1){
@@ -265,55 +418,6 @@ angular.module('myApp', [
                 sheets_data[key] = pick_order;
             });
         });
-        console.log(sheets_data);
-}])
-
-.controller('cardAutoComplete', ['$scope', '$http', '$q', '$mdMedia', '$mdDialog', '$log', function($scope, $http, $q, $mdMedia, $mdDialog, $log){
-
-    // --------------------------------------------- //
-    //                 Card Database                 //
-    // --------------------------------------------- //
-        
-    var self = this;
-
-    function filterCardObject(obj){
-        var deferred = $q.defer();
-        angular.forEach(obj.data ,function(card ,key){
-            obj.names.push(card.name)
-            deferred.resolve(obj)
-        });
-        return deferred.promise;
-    }
-
-    $http.get('AllCards.json').then(function(res){
-        var cards = {'data' : res.data, 'names':[]}; 
-        filterCardObject(cards).then(function(res){
-            self.cardsNames = res.names;
-            // self.querySearch = querySearch();
-            // self.selectedItemChange = selectedItemChange;
-            // self.searchTextChange = searchTextChange;
-        });
-    });
-
-    self.querySearch = function(query) {
-        return query ? self.cardsNames.filter( createFilterFor(query) ) : self.cardsNames;
-    }
-
-    self.searchTextChange = function(text) {
-        $log.info('Text changed to ' + text);
-    }
-
-    self.selectedItemChange = function(item) {
-        $log.info('Item changed to ' + JSON.stringify(item));
-    }
-    
-    // Create filter function for a query string
-    function createFilterFor(query) {
-        var lowercaseQuery = angular.lowercase(query);
-        return function filterFn(card) {
-            return (self.cardsNames.indexOf(lowercaseQuery) === 0);
-        };
-    }
 }])
 .directive('draft', function($window) {
     return function (scope, element) {
@@ -350,7 +454,6 @@ angular.module('myApp', [
     link: function(scope, element, attr) {
       var startX = 0, startY = 0, x = 0, y = 0;
       var w_width =  angular.element(window).width();
-      console.log(w_width);
 
       element.css({
        position: 'absolute',
@@ -364,8 +467,6 @@ angular.module('myApp', [
         event.preventDefault();
         startX = event.pageX - x;
         startY = event.pageY - y;
-        console.log(startX)
-        console.log(startY);
         $document.on('mousemove', mousemove);
         $document.on('mouseup', mouseup);
       });

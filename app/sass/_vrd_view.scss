@@ -42,3 +42,10 @@ card-dragger{
 md-content{
 	position:relative;
 }
+.md-autocomplete-suggestions-container.md-default-theme li .highlight, 
+.md-autocomplete-suggestions-container li .highlight{
+	color:red;
+}
+.pick{
+	text-align: center;
+}
