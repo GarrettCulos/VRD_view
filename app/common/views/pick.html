@@ -1,0 +1,35 @@
+<md-dialog aria-label="Pick"  ng-cloak>
+    <form name="Pick">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Select a Card</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="hide()">
+                    <md-icon md-svg-src="img/svg/close.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        
+        <md-dialog-content style="text-align:center;">
+
+            <md-autocomplete md-selected-item="selectedItem" md-selected-item-change="viewCard(selectedItem)" md-search-text="searchText" md-delay="400" md-item-text="item"  md-items="item in localSearch(searchText)">
+                <md-item-template>
+                    <span md-highlight-text="searchText">{{item}}</span>
+                </md-item-template>
+                <md-not-found>
+                    No card matching "{{ctrl.searchText}}" was found.
+                </md-not-found>
+            </md-autocomplete>
+            
+            <img ng-if="cardImage != 'https://image.deckbrew.com/mtg/multiverseid/0.jpg'" src="{{cardImage}}" alt="{{cardView.name}}" style="margin-top:20px;">
+
+        </md-dialog-content>
+        
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="submit()">
+                Submit
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

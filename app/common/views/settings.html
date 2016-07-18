@@ -14,15 +14,15 @@
 
         <md-input-container layout="row" required flex>
             <label>VRD Google Sheets Id</label>
-            <input type="text" name="settings.sheetsID" ng-model="googleSheetsId" aria-label="Google Sheets ID" required>
+            <input type="text" name="sheetsID" ng-model="googleSheetsId" aria-label="Google Sheets ID" required>
         </md-input-container>
         
         <md-input-container ng-show="!spectator" layout="row" flex>
             <label>Seat number</label>
-            <input type="text" name="settings.seatNum" ng-model="seat_number" aria-label="Seat Number">
+            <input type="text" name="seatNum" ng-model="seatNumber" aria-label="Seat Number">
         </md-input-container>
         
-        <md-switch class="md-primary" ng-model="spectator" name="settings.spectator" aria-label="Spectator" layout="row" flex>
+        <md-switch class="md-primary" ng-model="spectator" name="spectator" aria-label="Spectator" layout="row" flex>
             Spectator
         </md-switch>
     </md-dialog-content>
