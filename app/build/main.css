@@ -37504,4 +37504,59 @@ md-content {
 /* line 49, ../sass/_vrd_view.scss */
 .pick {
   text-align: center;
+  text-transform: capitalize;
+}
+
+/* line 55, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table {
+  height: 100%;
+  border-left: 1px solid rgba(1, 1, 1, 0.2);
+}
+/* line 58, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table thead {
+  width: 100%;
+  display: block;
+}
+/* line 61, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table thead tr {
+  width: 100%;
+  display: inline-table;
+}
+/* line 64, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table thead tr td.md-cell:first-child {
+  padding-left: 10px;
+}
+/* line 69, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table tbody.md-body {
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+/* line 73, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table tbody.md-body td {
+  position: relative;
+}
+/* line 76, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table tbody.md-body tr.md-row:hover {
+  background-color: rgba(1, 1, 1, 0.2);
+}
+/* line 78, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table tbody.md-body tr.md-row:hover .epo-remove-card {
+  display: inline-table;
+  position: absolute;
+  right: 5px;
+  top: 0;
+  bottom: 0;
+}
+/* line 86, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table tbody.md-body tr.md-row {
+  height: 30px;
+}
+/* line 88, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table tbody.md-body tr.md-row .epo-remove-card {
+  display: none;
+}
+/* line 91, ../sass/_vrd_view.scss */
+expected-pick-order table.md-table tbody.md-body tr.md-row td.md-cell:first-child {
+  padding-left: 10px;
 }

@@ -2,12 +2,12 @@
 
 <!-- Filter -->
 
-<md-content id="main">
+<md-content id="main" layout="row">
 	<div ng-show="!draft" flex style="text-align:center;"> 
 		No GoogleSheets Available 
 	</div>
-	<draft ng-show="draft" flex="80" layout="row" layout-style="center strech">
-		<md-data-table-container>
+	<draft ng-show="draft" flex="80" layout="column" layout-style="center strech">
+		<md-data-table-container style="overflow:auto;">
 			<table md-table md-row-select style="height:100%;">
 				<thead md-head style="width:100%; display:block;">
 					<tr md-row>
@@ -18,7 +18,7 @@
 				<tbody md-body style="display:block; width: 100%; overflow: auto;">
 					<tr md-row ng-repeat="(key, row) in draft.picks track by $index" >
 						<td md-cell>{{key+1}}</td>
-						<td md-cell ng-click="viewCard($event, key, seatNumber)" ng-repeat="(seatNumber, pick) in row track by $index">
+						<td md-cell ng-click="viewCard(pick)" ng-repeat="(seatNumber, pick) in row track by $index">
 							<div class="pick" ng-if="pick">{{pick}}</div>
 							<md-button ng-if="seatNumber+1 == settings.seat_number && !pick && key+1==draft_round" ng-click="showPickDialog($event)">
 								Pick
@@ -29,6 +29,33 @@
 			</table>
 		</md-data-table-container>
 	</draft>
+	<expected-pick-order layout="column" flex="20">
+		<md-data-table-container>
+			<table md-table md-row-select>
+				<thead md-head>
+					<tr md-row>
+						<th md-column style="padding-left:10px;">Card Name</th>
+						<th md-column style="min-width:100px; text-align: right;">Expected Pick Ord</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat="card in EPO | cardChosen:pickList | orderBy:'VRD_EPO' track by $index">
+						<td md-cell ng-click="viewCard(card.name)" >
+							{{card.name}}
+						</td>
+						<td md-cell ng-if="card.VRD_EPO <= 16" style="min-width:100px; position:relative;">
+							P: {{card.VRD_EPO | limitTo: 5}} ({{card.VRD_numTD}})
+							<md-icon ng-click="removeCard(card)" class="epo-remove-card" md-svg-src="img/svg/close.svg" aria-label="Remove Card"></md-icon>
+						</td>
+						<td md-cell ng-if="card.VRD_EPO > 16" style="min-width:100px; position:relative;"> 
+							R: {{card.VRD_EPO/8 | limitTo: 4}} ({{card.VRD_numTD}})
+							<md-icon ng-click="removeCard(card)" class="epo-remove-card" md-svg-src="img/svg/close.svg" aria-label="Remove Card"></md-icon>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-data-table-container>
+	</expected-pick-order>
 
 	<card-dragger id="popup" flex="20">
 		<div ng-if="cardView">
@@ -42,7 +69,6 @@
 			</div>
 		</div>
 		<div ng-if="!cardView">
-			No Cards
 		</div>
 	</card-dragger>
 </md-content>

@@ -48,4 +48,51 @@ md-content{
 }
 .pick{
 	text-align: center;
+	text-transform:capitalize;
 }
+
+expected-pick-order{
+	table.md-table{
+	height:100%; 
+	border-left: 1px solid rgba(1,1,1,0.2);
+		thead{
+			width:100%; 
+			display:block;
+			tr{
+				width: 100%;
+				display: inline-table;
+				td.md-cell:first-child{
+					padding-left:10px;
+				}
+			}
+		}
+		tbody.md-body {
+			display:block; 
+			width: 100%; 
+			overflow: auto;
+			td{
+				position:relative;
+			}
+			tr.md-row:hover{
+				background-color:rgba(1,1,1,0.2);
+				.epo-remove-card{
+			    display: inline-table;
+			    position: absolute;
+			    right: 5px;
+			    top: 0;
+			    bottom: 0;
+				}	
+			}
+			tr.md-row{
+				height:30px;
+				.epo-remove-card{
+					display:none;
+				}	
+				td.md-cell:first-child{
+					padding-left:10px;
+				}
+			}
+		}	
+	}
+}
+
