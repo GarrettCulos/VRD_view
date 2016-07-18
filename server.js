@@ -3,11 +3,11 @@ var app 		= express();
 
 var bodyParser  = require('body-parser');
 
-app.set('port', 8001);
+app.set('port', 8000);
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" })); // for parsing application/x-www-form-urlencoded
 
-app.use('/', express.static('../VRD_view/'));
+app.use('/', express.static('../VRD_draft/'));
 
 app.listen(app.get('port'), function(){
   console.log("Node app is running at localhost:" + app.get('port'));
