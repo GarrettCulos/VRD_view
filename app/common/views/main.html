@@ -30,8 +30,38 @@
 		</md-data-table-container>
 	</draft>
 	<expected-pick-order layout="column" flex>
+
 		<md-data-table-container>
 			<table md-table md-row-select>
+				<thead md-head>
+					<tr md-head>
+						<div flex>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="cardFilter.colors.white" ng-init="cardFilter.colors.white = true">
+								white
+							</md-checkbox>
+						</div>
+						<div flex>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="cardFilter.colors.blue" ng-init="cardFilter.colors.blue = false">
+								blue
+							</md-checkbox>
+						</div>
+						<div flex>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="cardFilter.colors.black" ng-init="cardFilter.colors.black = true">
+								black
+							</md-checkbox>
+						</div>
+						<div flex>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="cardFilter.colors.red" ng-init="cardFilter.colors.red = true">
+								red
+							</md-checkbox>
+						</div>
+						<div flex>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="cardFilter.colors.green" ng-init="cardFilter.colors.green = true">
+								green
+							</md-checkbox>
+						</div>
+					</tr>
+				</thead>
 				<thead md-head>
 					<tr md-row>
 						<th md-column style="padding-left:10px;">Card Name</th>
@@ -39,7 +69,7 @@
 					</tr>
 				</thead>
 				<tbody md-body>
-					<tr md-row ng-repeat="card in EPO | cardChosen:pickList | orderBy:'VRD_EPO' track by $index">
+					<tr md-row ng-repeat="card in EPO | cardChosen:pickList:cardFilter | orderBy:'VRD_EPO' track by $index">
 						<td md-cell ng-click="viewCard(card.name)" >
 							{{card.name}}
 						</td>

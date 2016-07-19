@@ -23,7 +23,7 @@ angular.module('myApp', [
     	templateUrl: 'common/404.html',
     });
 }])
-.run(function($http, $q, $rootScope) {
+.run(function($rootScope) {
     $rootScope.google_api_key = 'AIzaSyB-9nVkiHEVV79h74o_8YMMBXMLKG1PvCY';
 
     $rootScope.settings = {
@@ -543,6 +543,12 @@ angular.module('myApp', [
         $scope.removeCard = function(item){
             $scope.EPO.splice($scope.EPO.indexOf(item),1);
         }
+
+    // --------------------------------------------- //
+    //                 Card filter                   //
+    // --------------------------------------------- //        
+
+    $scope.cardFilter = {};
 }])
 
 .directive('draft', function($window) {
@@ -631,12 +637,35 @@ angular.module('myApp', [
   }
 }])
 
+.directive('cardFilter', function() {
+    return function(scope, element){
+
+    }
+})
+
 .filter('cardChosen', function() {
-    return function(cards, pickList) {
+    return function(cards, pickList,filterOptions) {
         var filtered = [];
+
+        function cardColor(card, filterOptions){
+            var cardAllowed = true;
+            // filter colors
+            if(card.colors !== undefined){
+                for( var i = 0; i<card.colors.length; i++){
+                    if(!filterOptions.colors[card.colors[i].toLowerCase()]){
+                        cardAllowed = false;
+                    }
+                }    
+            }
+
+            return cardAllowed;
+        }
+
         angular.forEach(cards, function(item) {
             if(pickList.indexOf(item.name.toLowerCase()) < 0) {
-                filtered.push(item);
+                if(cardColor(item, filterOptions)){
+                    filtered.push(item);    
+                }
             }
         });
         return filtered;

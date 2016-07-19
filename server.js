@@ -3,7 +3,7 @@ var app 		= express();
 
 var bodyParser  = require('body-parser');
 
-app.set('port', 8000);
+app.set('port', 8040);
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" })); // for parsing application/x-www-form-urlencoded
 

@@ -37538,11 +37538,11 @@ draft md-data-table-container table.md-table tr th:first-child {
 /* line 81, ../sass/_vrd_view.scss */
 expected-pick-order md-data-table-container {
   overflow: auto;
+  border-left: 1px solid rgba(1, 1, 1, 0.2);
 }
-/* line 83, ../sass/_vrd_view.scss */
+/* line 84, ../sass/_vrd_view.scss */
 expected-pick-order md-data-table-container table.md-table {
   height: 100%;
-  border-left: 1px solid rgba(1, 1, 1, 0.2);
 }
 /* line 92, ../sass/_vrd_view.scss */
 expected-pick-order md-data-table-container table.md-table thead tr td.md-cell:first-child {

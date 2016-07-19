@@ -80,9 +80,9 @@ draft{
 expected-pick-order{
 	md-data-table-container{
 		overflow: auto;
-		table.md-table{
-		height:100%; 
 		border-left: 1px solid rgba(1,1,1,0.2);
+		table.md-table{
+			height:100%; 
 			thead{
 				// width:100%; 
 				// display:block;
