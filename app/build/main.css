@@ -37581,3 +37581,30 @@ expected-pick-order md-data-table-container table.md-table tbody.md-body tr.md-r
   text-align: right;
   padding-right: 35px;
 }
+
+/* line 132, ../sass/_vrd_view.scss */
+card-filter {
+  color: rgba(0, 0, 0, 0.87);
+  display: block;
+  border-bottom: 1px solid rgba(1, 1, 1, 0.2);
+  padding: 10px;
+}
+/* line 137, ../sass/_vrd_view.scss */
+card-filter .color-filter {
+  font-size: 14px;
+  text-transform: capitalize;
+  display: inline-block;
+}
+/* line 142, ../sass/_vrd_view.scss */
+card-filter form {
+  max-height: 0;
+  opacity: 0;
+  transition: all 1s ease-in;
+}
+/* line 147, ../sass/_vrd_view.scss */
+card-filter form.open {
+  transition: all 1s ease-in;
+  max-height: 300px;
+  overflow: auto;
+  opacity: 1;
+}

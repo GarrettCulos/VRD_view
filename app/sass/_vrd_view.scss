@@ -128,3 +128,26 @@ expected-pick-order{
 		}
 	}
 }
+
+card-filter{
+	color: rgba(0,0,0,.87);
+	display:block;
+	border-bottom: 1px solid rgba(1,1,1,0.2);
+	padding:10px;
+	.color-filter{
+		font-size: 14px;
+		text-transform: capitalize;
+		display:inline-block;
+	}
+	form{
+		max-height:0;
+		opacity:0;
+		transition:all 1s ease-in;
+	}
+	form.open{
+		transition:all 1s ease-in;
+		max-height:300px;
+		overflow:auto;
+		opacity:1;
+	}
+}
