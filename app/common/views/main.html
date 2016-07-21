@@ -6,7 +6,7 @@
 	<div ng-show="!draft" flex style="text-align:center;"> 
 		No GoogleSheets Available 
 	</div>
-	<draft ng-show="draft" flex="80" layout="column" layout-style="center strech">
+	<draft ng-show="draft" flex layout="column" layout-style="center strech">
 		<md-data-table-container>
 			<table md-table md-row-select>
 				<thead md-head>
@@ -29,10 +29,10 @@
 			</table>
 		</md-data-table-container>
 	</draft>
-	<expected-pick-order layout="column" flex>
+	<expected-pick-order>
 
 		<md-data-table-container>
-			<table md-table md-row-select>
+			<card-filter-search>
 				<card-search controller="PickDialogController">
 					<md-autocomplete md-selected-item="searchItem" md-selected-item-change="viewCard(searchItem)" md-search-text="searchItem" md-delay="400" md-item-text="item"  md-items="item in localSearch(searchItem)">
 		                <md-item-template>
@@ -43,45 +43,82 @@
 		                </md-not-found>
 		            </md-autocomplete>
 				</card-search>
-				<card-filter>
-					<div ayout="row" flex>
-						<span flex></span>
-						<md-button class="md-icon-button" aria-label="More">
-							<md-icon ng-click="expandFilter()" md-svg-icon="img/svg/menu.svg"></md-icon>
-						</md-button>	
-					</div>
+				<div layout="row" flex>
+					<h4>Filter Options</h4>
+					<span flex></span>
+					<md-button class="md-icon-button" aria-label="More">
+						<md-icon ng-click="toggleHidden()" md-svg-icon="img/svg/menu.svg"></md-icon>
+					</md-button>	
+				</div>
 
-					<form>
+				<div ng-class="{'visible': cardFilter.visible}" class="filter-options"> 
+					<form name="cardFilterForm">
+						
+						<h4 layout="row" flex>Color</h4>
+						
 						<div layout="row" flex>
-							<h4>Filter By Color</h4>
+							<div class="filter-div">white </div>
+							<span flex></span>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="formdata.colors.white" ng-init="formdata.colors.white=true"></md-checkbox>
 						</div>
 						<div layout="row" flex>
-							<div class="color-filter">white </div>
+							<div class="filter-div">blue </div>
 							<span flex></span>
-							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="cardFilter.colors.white" ng-init="cardFilter.colors.white = true"></md-checkbox>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="formdata.colors.blue" ng-init="formdata.colors.blue=true"></md-checkbox>
 						</div>
 						<div layout="row" flex>
-							<div class="color-filter">blue </div>
+							<div class="filter-div">black </div>
 							<span flex></span>
-							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="cardFilter.colors.blue" ng-init="cardFilter.colors.blue = true"></md-checkbox>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="formdata.colors.black" ng-init="formdata.colors.black=true"></md-checkbox>
 						</div>
 						<div layout="row" flex>
-							<div class="color-filter">black </div>
+							<div class="filter-div">red </div>
 							<span flex></span>
-							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="cardFilter.colors.black" ng-init="cardFilter.colors.black = true"></md-checkbox>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="formdata.colors.red" ng-init="formdata.colors.red=true"></md-checkbox>
 						</div>
 						<div layout="row" flex>
-							<div class="color-filter">red </div>
+							<div class="filter-div">green </div>
 							<span flex></span>
-							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="cardFilter.colors.red" ng-init="cardFilter.colors.red = true"></md-checkbox>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="formdata.colors.green" ng-init="formdata.colors.green=true"></md-checkbox>
+						</div>
+						
+						<div layout="row" flex>
+							<div class="filter-div">colourless </div>
+							<span flex></span>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="formdata.colourless" ng-init="formdata.colourless=true"></md-checkbox>
+						</div>	
+
+						<h4 layout="row" flex>Type</h4>
+						
+						<div layout="row" flex>
+							<div class="filter-div">land </div>
+							<span flex></span>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="formdata.types.land" ng-init="formdata.types.land=true"></md-checkbox>
 						</div>
 						<div layout="row" flex>
-							<div class="color-filter">green </div>
+							<div class="filter-div">Creatures </div>
 							<span flex></span>
-							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="cardFilter.colors.green" ng-init="cardFilter.colors.green = true"></md-checkbox>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="formdata.types.creature" ng-init="formdata.types.creature=true"></md-checkbox>
+						</div>
+						<div layout="row" flex>
+							<div class="filter-div">Artifact </div>
+							<span flex></span>
+							<md-checkbox class="md-primary" aria-label="checked checkbox" ng-model="formdata.types.artifact" ng-init="formdata.types.artifact=true"></md-checkbox>
+						</div>
+
+						<div layout="row" flex>
+							<md-button class="md-primary" ng-click="updateFilter(formdata)" flex>
+								Filter
+							</md-button>
+							<md-button class="md-primary" ng-click="resetFilter()" flex>
+								Reset
+							</md-button>
 						</div>
 					</form>
-				</card-filter>
+				</div>
+			</card-filter-search>
+
+			<table md-table md-row-select>
 				<thead md-head>
 					<tr md-row>
 						<th md-column style="padding-left:10px;">Card Name</th>
@@ -105,6 +142,7 @@
 				</tbody>
 			</table>
 		</md-data-table-container>
+
 	</expected-pick-order>
 
 	<card-dragger id="popup" flex="20">

@@ -548,7 +548,42 @@ angular.module('myApp', [
     //                 Card filter                   //
     // --------------------------------------------- //        
 
-    $scope.cardFilter = {};
+    var cardFilter = {};
+    cardFilter.hidden = false;
+    cardFilter.colors = {
+        white: true,
+        black: true,
+        red: true,
+        blue: true,
+        green: true
+    };
+    cardFilter.colourless = true;
+    cardFilter.types = {
+        land : true,
+        creature: true,
+        artifact: true,
+        else: true
+    };
+    $scope.cardFilter  = cardFilter;
+
+    $scope.toggleHidden = function(){
+        if($scope.cardFilter.visible == false){
+            $scope.cardFilter.visible = true;
+        } else{
+            $scope.cardFilter.visible = false;
+        }
+    };
+
+    $scope.updateFilter = function(updateFilter){
+        $scope.cardFilter = updateFilter;
+        $scope.cardFilter.visible = false;
+    };
+
+    $scope.resetFilter = function(){
+        $scope.updateFilter(cardFilter);
+        $scope.formdata = cardFilter;
+    };
+
 }])
 
 .directive('draft', function($window) {
@@ -566,18 +601,21 @@ angular.module('myApp', [
     }
 })
 
-.directive('expected-pick-order',function($window) {
+.directive('expectedPickOrder',function($window) {
     return function (scope, element) {
         var w = angular.element($window);
-        var setHeight = function() {
-            angular.element('draft').css({'height':w.height()});
-        }
+        var filterdiv = angular.element('card-filter-search');
 
+        var setHeightWidth = function() {
+            angular.element('expected-pick-order table').css({'height':(w.height()-filterdiv.height())});
+            angular.element('expected-pick-order').css({'width':258});
+        }
+        
         w.trigger('resize', function () {
-            setHeight()
+            setHeightWidth()
         });
 
-        setHeight()
+        setHeightWidth()
     }
 })
 
@@ -637,42 +675,63 @@ angular.module('myApp', [
   }
 }])
 
-.directive('cardFilter', function() {
-    return {
-        link:function(scope, element){
-            scope.expandFilter=function(){
-                element.find('form').toggleClass('open');
-            }
-        }
+.directive('cardFilterSearch', function($window) {
+    return function(scope, element){
+        // var w = angular.element($window);
+        // var thead = angular.element('this');
+
+        // var setHeight = function() {
+        //     angular.element('tbody').css({'height':(w.height()-thead.height())});
+        // }
+
+        // w.trigger('resize', function () {
+        //     setHeight()
+        // });
+
+        // setHeight()
     }
 })
+
 .directive('cardSearch', function() {
     return function(scope, element){
 
 
     }
 })
+
 .filter('cardChosen', function() {
-    return function(cards, pickList,filterOptions) {
+    return function(cards, pickList, filterOptions) {
         var filtered = [];
 
-        function cardColor(card, filterOptions){
+        function cardType(card, option){
             var cardAllowed = true;
             // filter colors
-            if(card.colors !== undefined){
-                for( var i = 0; i<card.colors.length; i++){
-                    if(!filterOptions.colors[card.colors[i].toLowerCase()]){
+            if(card.types !== undefined){
+                for( var i = 0; i<card.types.length; i++){
+                    if(option[card.types[i].toLowerCase()] !== undefined && !option[card.types[i].toLowerCase()]){
                         cardAllowed = false;
                     }
                 }    
             }
+            return cardAllowed;
+        }
 
+        function cardColor(card, option){
+            var cardAllowed = true;
+            // filter colors
+            if(card.colors !== undefined){
+                for( var i = 0; i<card.colors.length; i++){
+                    if(!option[card.colors[i].toLowerCase()]){
+                        cardAllowed = false;
+                    }
+                }    
+            }
             return cardAllowed;
         }
 
         angular.forEach(cards, function(item) {
             if(pickList.indexOf(item.name.toLowerCase()) < 0) {
-                if(cardColor(item, filterOptions)){
+                if(cardColor(item, filterOptions.colors) && cardType(item, filterOptions.types)){
                     filtered.push(item);    
                 }
             }

@@ -81,13 +81,16 @@ expected-pick-order{
 	md-data-table-container{
 		overflow: auto;
 		border-left: 1px solid rgba(1,1,1,0.2);
+		display:block;
 		table.md-table{
 			height:100%; 
+			display:block;
+			overflow:auto;
 			thead{
-				// width:100%; 
+				width:100%; 
 				// display:block;
 				tr{
-					// width: 100%;
+					width: 100%;
 					// display: inline-table;
 					td.md-cell:first-child{
 						padding-left:10px;
@@ -129,25 +132,33 @@ expected-pick-order{
 	}
 }
 
-card-filter{
+card-filter-search{
+
 	color: rgba(0,0,0,.87);
 	display:block;
 	border-bottom: 1px solid rgba(1,1,1,0.2);
 	padding:10px;
-	.color-filter{
-		font-size: 14px;
+	
+	.filter-div{
 		text-transform: capitalize;
 		display:inline-block;
 	}
-	form{
+	
+	.filter-options{
 		max-height:0;
-		opacity:0;
-		transition:all 1s ease-in;
+		transition:all 0.25s ease-in;
 	}
-	form.open{
-		transition:all 1s ease-in;
-		max-height:300px;
+	
+	.filter-options.visible{
+		transition:all 0.25s ease-in;
+		max-height:100%;
 		overflow:auto;
-		opacity:1;
+
+		font-size:13px;
+		color:rgba(0,0,0,.87);
+	}
+
+	h4{
+		font-size:14px;
 	}
 }
