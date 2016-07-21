@@ -7,7 +7,23 @@
 		No GoogleSheets Available 
 	</div>
 	<draft ng-show="draft" flex layout="column" layout-style="center strech">
-		<md-data-table-container>
+		<draft-head layout="row">
+			<draft-round-number></draft-round-number>
+			<draft-player ng-repeat="player in draft.players" flex> {{player}} </draft-player>
+		</draft-head>
+		<draft-body>
+			<draft-round ng-repeat="(key, row) in draft.picks track by $index" layout="row">
+				<draft-round-number>
+				{{key+1}}
+				</draft-round-number>
+				<draft-pick ng-click="viewCard(pick)" ng-repeat="(seatNumber, pick) in row track by $index" flex>
+					<div class="pick" ng-if="pick">{{pick}}</div>
+					<md-button ng-if="seatNumber+1 == settings.seat_number && !pick && key+1==draft_round && !settings.spectator" ng-click="showPickDialog($event)"> Pick </md-button>
+				</draft-pick>
+			</draft-round>
+		</draft-body>
+
+		<!-- <md-data-table-container>
 			<table md-table md-row-select>
 				<thead md-head>
 					<tr md-row>
@@ -27,7 +43,7 @@
 					</tr>
 				</tbody>
 			</table>
-		</md-data-table-container>
+		</md-data-table-container> -->
 	</draft>
 	<expected-pick-order layout="column" flex="20">
 	

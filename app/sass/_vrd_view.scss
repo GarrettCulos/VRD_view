@@ -54,30 +54,39 @@ md-icon:focus{
 	text-transform:capitalize;
 }
 draft{
-	md-data-table-container{
-		overflow:auto;
-		table.md-table{
-			height:100%;
-			thead.md-head{
-				width:100%; 
-				display:block;
-			}
-			td.md-cell.ng-scope.md-clickable {
-		  	min-width: 132px;
-			}
-			tbody.md-body{
-				display:block;
-				width:100%;
-				overflow:auto;
-			}
-			tr{
-				th:first-child{
-					min-width:63px;
-				}
-			}
-		}
+	color: rgba(0,0,0,.87);
+	font-size:12px;
+
+	draft-round,
+	draft-head{
+		display:block;
+		min-height:45px;
+		max-height:60px;
+		border-bottom:1px solid rgba(1,1,1,0.2);
+	}
+	draft-head{
+		font-size:13px;
+		font-weight:500;
+	}
+	draft-round-number{
+		width:30px;
+		text-align:left;
 	}
 	
+	draft-body{
+		width:100%;
+		overflow:auto;
+
+	}
+
+	draft-round-number,
+	draft-player,
+	draft-pick{
+		line-height:1.2em;
+		display:inline-block;
+		padding:5px 10px;
+		text-align:center;
+	}
 }
 
 expected-pick-order{
