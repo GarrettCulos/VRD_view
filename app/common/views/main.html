@@ -7,56 +7,36 @@
 		No GoogleSheets Available 
 	</div>
 	<draft ng-show="draft" flex layout="column" layout-style="center strech">
-		<draft-head layout="row">
+		<draft-head layout="row" layout-align="space-around center">
 			<draft-round-number></draft-round-number>
-			<draft-player ng-repeat="player in draft.players" flex> {{player}} </draft-player>
+			<draft-player ng-repeat="player in draft.players" flex> <div class="pick">{{player}}</div></draft-player>
 		</draft-head>
 		<draft-body>
-			<draft-round ng-repeat="(key, row) in draft.picks track by $index" layout="row">
+			<draft-round ng-repeat="(key, row) in draft.picks track by $index" layout="row"  layout-align="space-around center">
 				<draft-round-number>
-				{{key+1}}
+					<div class="number-container">{{key+1}}</div>
 				</draft-round-number>
 				<draft-pick ng-click="viewCard(pick)" ng-repeat="(seatNumber, pick) in row track by $index" flex>
 					<div class="pick" ng-if="pick">{{pick}}</div>
-					<md-button ng-if="seatNumber+1 == settings.seat_number && !pick && key+1==draft_round && !settings.spectator" ng-click="showPickDialog($event)"> Pick </md-button>
+					<md-button ng-if="seatNumber+1 == settings.seat_number && !pick && key+1==draft_round && !settings.spectator" ng-click="showPickDialog($event)" style="margin:0;"> Pick </md-button>
 				</draft-pick>
 			</draft-round>
 		</draft-body>
-
-		<!-- <md-data-table-container>
-			<table md-table md-row-select>
-				<thead md-head>
-					<tr md-row>
-						<th md-column>  </th>
-						<th md-column ng-repeat="player in draft.players"> {{player}} </th>	
-					</tr>
-				</thead>
-				<tbody md-body>
-					<tr md-row ng-repeat="(key, row) in draft.picks track by $index" >
-						<td md-cell>{{key+1}}</td>
-						<td md-cell ng-click="viewCard(pick)" ng-repeat="(seatNumber, pick) in row track by $index">
-							<div class="pick" ng-if="pick">{{pick}}</div>
-							<md-button ng-if="seatNumber+1 == settings.seat_number && !pick && key+1==draft_round" ng-click="showPickDialog($event)">
-								Pick
-							</md-button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</md-data-table-container> -->
 	</draft>
 	<expected-pick-order layout="column" flex="20">
 	
 		<card-filter-search>
-			<card-search controller="PickDialogController">
-				<md-autocomplete md-selected-item="selectedItem" md-selected-item-change="viewCard(selectedItem)" md-search-text="searchText" md-delay="100" md-item-text="item"  md-items="item in localSearch(searchText)" style="margin-top:10px;">
-            <md-item-template>
-                <span md-highlight-text="searchText">{{item}}</span>
-            </md-item-template>
-            <md-not-found>
-                No card matching "{{searchText}}" was found.
-            </md-not-found>
-        </md-autocomplete>
+			<div ng-controller="PickDialogController">
+				<md-autocomplete md-selected-item="selectedItem" md-selected-item-change="viewCard(selectedItem)" md-search-text="searchText" md-delay="400" md-item-text="item"  md-items="item in localSearch(searchText)" style="margin-top:10px;">
+		            <md-item-template>
+		                <span md-highlight-text="searchText">{{item}}</span>
+		            </md-item-template>
+		            <md-not-found>
+		                No card matching "{{searchText}}" was found.
+		            </md-not-found>
+		        </md-autocomplete>
+	        </div>
+
 			</card-search>
 			<div layout="row" flex>
 				<h4>Filter Options</h4>
@@ -143,25 +123,23 @@
 				</div>
 			</epo-title>
 			<epo-body>
-				<epo-item ng-repeat="card in EPO | cardChosen:pickList:cardFilter | orderBy:'VRD_EPO' track by $index">
-					<div class="card-name" ng-click="viewCard(card.name)">
+				<epo-item ng-repeat="card in EPO | cardChosen:pickList:cardFilter | orderBy:'VRD_EPO' track by $index" layout="row"  layout-align="space-between center">
+					<div class="card-name" ng-click="viewCard(card.name)" style="max-width:180px;">
 						{{card.name}}
 					</div>
 					<div class="card-stats" ng-if="card.VRD_EPO <= 16" style="min-width:100px; position:relative;">
 						P: {{card.VRD_EPO | limitTo: 5}} ({{card.VRD_numTD}})
-						<md-icon ng-click="removeCard(card)" class="epo-remove-card" md-svg-src="img/svg/close.svg" aria-label="Remove Card"></md-icon>
+						<md-icon class="light" ng-click="removeCard(card)" class="epo-remove-card" md-svg-src="img/svg/close.svg" aria-label="Remove Card"></md-icon>
 					</div>
 					<div class="card-stats" ng-if="card.VRD_EPO > 16" style="min-width:100px; position:relative;"> 
 						R: {{card.VRD_EPO/8 | limitTo: 4}} ({{card.VRD_numTD}})
-						<md-icon ng-click="removeCard(card)" class="epo-remove-card" md-svg-src="img/svg/close.svg" aria-label="Remove Card"></md-icon>
+						<md-icon class="light"  ng-click="removeCard(card)" class="epo-remove-card" md-svg-src="img/svg/close.svg" aria-label="Remove Card"></md-icon>
 					</div>
 				</epo-item>
 			</epo-body>
 		</epo-list>
-		
 	</expected-pick-order>
 		
-
 	<card-dragger id="popup" flex="20">
 		<div ng-if="cardView">
 			<img ng-if="cardImage != 'https://image.deckbrew.com/mtg/multiverseid/0.jpg'" src="{{cardImage}}" alt="{{cardView.name}}">

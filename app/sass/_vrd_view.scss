@@ -49,10 +49,6 @@ md-content{
 md-icon:focus{
 	outline: none;
 }
-.pick{
-	text-align: center;
-	text-transform:capitalize;
-}
 draft{
 	color: rgba(0,0,0,.87);
 	font-size:12px;
@@ -74,6 +70,7 @@ draft{
 	}
 	
 	draft-body{
+		color: rgba(0,0,0,.67);
 		width:100%;
 		overflow:auto;
 
@@ -86,7 +83,21 @@ draft{
 		display:inline-block;
 		padding:5px 10px;
 		text-align:center;
+		&:focus{
+			outline:none;
+		}
 	}
+	
+	.number-container{
+		line-height:1.2em;
+	}
+
+	.pick{
+		line-height:1.2em;
+		text-align: center;
+		text-transform:capitalize;
+	}
+
 }
 
 expected-pick-order{
@@ -98,16 +109,24 @@ expected-pick-order{
 		border-left: 1px solid rgba(1,1,1,0.2);
 		display:block;
 		epo-title{
-		font-weight:500;
+			font-weight:500;
 		}
-
+		.card-name{
+			&:focus{
+				outline:none;
+			}
+		}
+		
 		epo-item,
 		epo-title{
+			&:focus{
+				outline:none;
+			}
 			width:100%;
 			display:block;
 			padding:5px 10px;
 			border-bottom: 1px solid rgba(1,1,1,0.2);
-			height: 30px;
+			min-height: 30px;
 			font-size:13px;
 
 			.card-name{
@@ -115,8 +134,6 @@ expected-pick-order{
 				display:inline-block;
 			}
 			.card-stats{
-
-				float:right;
 				text-align:right;
 				display:inline-block;
 			}
