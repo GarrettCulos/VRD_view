@@ -46,6 +46,9 @@ md-content{
 .md-autocomplete-suggestions-container li .highlight{
 	color:red;
 }
+md-icon:focus{
+	outline: none;
+}
 .pick{
 	text-align: center;
 	text-transform:capitalize;
@@ -78,87 +81,77 @@ draft{
 }
 
 expected-pick-order{
-	md-data-table-container{
+	color: rgba(0,0,0,.87);
+	
+	epo-list{
+		width:100%;
 		overflow: auto;
 		border-left: 1px solid rgba(1,1,1,0.2);
 		display:block;
-		table.md-table{
-			height:100%; 
+		epo-title{
+		font-weight:500;
+		}
+
+		epo-item,
+		epo-title{
+			width:100%;
+			display:block;
+			padding:5px 10px;
+			border-bottom: 1px solid rgba(1,1,1,0.2);
+			height: 30px;
+			font-size:13px;
+
+			.card-name{
+				text-align:left;
+				display:inline-block;
+			}
+			.card-stats{
+
+				float:right;
+				text-align:right;
+				display:inline-block;
+			}
+
+		}
+
+		epo-body{
+			width:100%;
+			display:block;
+		}
+	}
+
+	card-filter-search{
+		display:block;
+		border-bottom: 1px solid rgba(1,1,1,0.2);
+		border-left: 1px solid rgba(1,1,1,0.2);
+		padding:0 10px;
+		
+		.filter-div{
+			text-transform: capitalize;
+			display:inline-block;
+		}
+		
+		.filter-options{
+			max-height:0;
+			display:none;
+			opacity:0;
+			transition:all 0.25s ease-in;
+		}
+		
+		.filter-options.visible{
+			transition:all 0.25s ease-in;
+			max-height:600px;
 			display:block;
 			overflow:auto;
-			thead{
-				width:100%; 
-				// display:block;
-				tr{
-					width: 100%;
-					// display: inline-table;
-					td.md-cell:first-child{
-						padding-left:10px;
-					}
-				}
-			}
-			tbody.md-body {
-				// display:block; 
-				// width: 100%; 
-				// overflow: auto;
-				td{
-					position:relative;
-				}
-				tr.md-row:hover{
-					background-color:rgba(1,1,1,0.2);
-					.epo-remove-card{
-				    display: inline-table;
-				    position: absolute;
-				    right: 5px;
-				    top: 0;
-				    bottom: 0;
-					}	
-				}
-				tr.md-row{
-					height:30px;
-					.epo-remove-card{
-						display:none;
-					}	
-					td.md-cell:first-child{
-						padding-left:10px;
-					}
-					td.md-cell:last-child{
-						text-align: right;
-						padding-right: 35px;
-					}
-				}
-			}	
+			opacity:1;
+			font-size:13px;
+			color:rgba(0,0,0,.87);
+		}
+
+		h4{
+			font-size:14px;
 		}
 	}
 }
 
-card-filter-search{
 
-	color: rgba(0,0,0,.87);
-	display:block;
-	border-bottom: 1px solid rgba(1,1,1,0.2);
-	padding:10px;
-	
-	.filter-div{
-		text-transform: capitalize;
-		display:inline-block;
-	}
-	
-	.filter-options{
-		max-height:0;
-		transition:all 0.25s ease-in;
-	}
-	
-	.filter-options.visible{
-		transition:all 0.25s ease-in;
-		max-height:100%;
-		overflow:auto;
-
-		font-size:13px;
-		color:rgba(0,0,0,.87);
-	}
-
-	h4{
-		font-size:14px;
-	}
-}

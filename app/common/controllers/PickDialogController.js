@@ -2,10 +2,10 @@
 
 angular.module('myApp.picker', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md.data.table'])
 
-.controller('PickDialogController', ['$scope', '$rootScope', '$http', '$q', '$mdDialog', function($scope, $rootScpe, $http, $q, $mdDialog) {
+.controller('PickDialogController', ['$scope', '$rootScope', '$http', '$q', '$mdDialog', '$mdMedia', function($scope, $rootScope, $http, $q, $mdDialog, $mdMedia) {
 
-    // function PickDialogController($scope, $rootScope, $mdDialog) {
     // search function to match full text
+    console.log($rootScope);
     $scope.localSearch = function(str) {
         var matches = [];
         $rootScope.cardsNames.forEach(function(card) {
@@ -73,7 +73,5 @@ angular.module('myApp.picker', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria', 
             }
         });
     }
-// }
-
 
 }]);

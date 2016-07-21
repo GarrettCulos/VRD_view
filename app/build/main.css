@@ -37266,29 +37266,51 @@ md-dialog md-dialog-content {
   margin: 0;
 }
 
-/* line 1, ../sass/_icons.scss */
+/* line 2, ../sass/_icons.scss */
+headernav svg {
+  display: inline-block;
+  width: 25px;
+  font-size: inherit;
+  vertical-align: middle;
+}
+/* line 8, ../sass/_icons.scss */
+headernav svg circle,
+headernav svg polygon,
+headernav svg rect,
+headernav svg path {
+  fill: whitesmoke;
+}
+/* line 15, ../sass/_icons.scss */
+headernav svg:hover circle,
+headernav svg:hover polygon,
+headernav svg:hover rect,
+headernav svg:hover path {
+  fill: #cdcdcd;
+}
+
+/* line 24, ../sass/_icons.scss */
 svg {
   display: inline-block;
   width: 25px;
   font-size: inherit;
   vertical-align: middle;
 }
-/* line 7, ../sass/_icons.scss */
+/* line 30, ../sass/_icons.scss */
 svg circle,
 svg polygon,
 svg rect,
 svg path {
-  fill: whitesmoke;
+  fill: rgba(0, 0, 0, 0.56);
 }
-/* line 14, ../sass/_icons.scss */
+/* line 37, ../sass/_icons.scss */
 svg:hover circle,
 svg:hover polygon,
 svg:hover rect,
 svg:hover path {
-  fill: #cdcdcd;
+  fill: rgba(0, 0, 0, 0.56);
 }
 
-/* line 22, ../sass/_icons.scss */
+/* line 45, ../sass/_icons.scss */
 .disabled {
   display: none;
 }
@@ -37502,125 +37524,117 @@ md-content {
 }
 
 /* line 49, ../sass/_vrd_view.scss */
+md-icon:focus {
+  outline: none;
+}
+
+/* line 52, ../sass/_vrd_view.scss */
 .pick {
   text-align: center;
   text-transform: capitalize;
 }
 
-/* line 54, ../sass/_vrd_view.scss */
+/* line 57, ../sass/_vrd_view.scss */
 draft md-data-table-container {
   overflow: auto;
 }
-/* line 56, ../sass/_vrd_view.scss */
+/* line 59, ../sass/_vrd_view.scss */
 draft md-data-table-container table.md-table {
   height: 100%;
 }
-/* line 58, ../sass/_vrd_view.scss */
+/* line 61, ../sass/_vrd_view.scss */
 draft md-data-table-container table.md-table thead.md-head {
   width: 100%;
   display: block;
 }
-/* line 62, ../sass/_vrd_view.scss */
+/* line 65, ../sass/_vrd_view.scss */
 draft md-data-table-container table.md-table td.md-cell.ng-scope.md-clickable {
   min-width: 132px;
 }
-/* line 65, ../sass/_vrd_view.scss */
+/* line 68, ../sass/_vrd_view.scss */
 draft md-data-table-container table.md-table tbody.md-body {
   display: block;
   width: 100%;
   overflow: auto;
 }
-/* line 71, ../sass/_vrd_view.scss */
+/* line 74, ../sass/_vrd_view.scss */
 draft md-data-table-container table.md-table tr th:first-child {
   min-width: 63px;
 }
 
-/* line 81, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container {
+/* line 83, ../sass/_vrd_view.scss */
+expected-pick-order {
+  color: rgba(0, 0, 0, 0.87);
+}
+/* line 86, ../sass/_vrd_view.scss */
+expected-pick-order epo-list {
+  width: 100%;
   overflow: auto;
   border-left: 1px solid rgba(1, 1, 1, 0.2);
   display: block;
 }
-/* line 85, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table {
-  height: 100%;
-  display: block;
-  overflow: auto;
-}
-/* line 89, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table thead {
-  width: 100%;
-}
-/* line 92, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table thead tr {
-  width: 100%;
+/* line 91, ../sass/_vrd_view.scss */
+expected-pick-order epo-list epo-title {
+  font-weight: 500;
 }
 /* line 95, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table thead tr td.md-cell:first-child {
-  padding-left: 10px;
+expected-pick-order epo-list epo-item,
+expected-pick-order epo-list epo-title {
+  width: 100%;
+  display: block;
+  padding: 5px 10px;
+  border-bottom: 1px solid rgba(1, 1, 1, 0.2);
+  height: 30px;
+  font-size: 13px;
 }
 /* line 104, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table tbody.md-body td {
-  position: relative;
+expected-pick-order epo-list epo-item .card-name,
+expected-pick-order epo-list epo-title .card-name {
+  text-align: left;
+  display: inline-block;
 }
-/* line 107, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table tbody.md-body tr.md-row:hover {
-  background-color: rgba(1, 1, 1, 0.2);
-}
-/* line 109, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table tbody.md-body tr.md-row:hover .epo-remove-card {
-  display: inline-table;
-  position: absolute;
-  right: 5px;
-  top: 0;
-  bottom: 0;
+/* line 108, ../sass/_vrd_view.scss */
+expected-pick-order epo-list epo-item .card-stats,
+expected-pick-order epo-list epo-title .card-stats {
+  float: right;
+  text-align: right;
+  display: inline-block;
 }
 /* line 117, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table tbody.md-body tr.md-row {
-  height: 30px;
+expected-pick-order epo-list epo-body {
+  width: 100%;
+  display: block;
 }
-/* line 119, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table tbody.md-body tr.md-row .epo-remove-card {
-  display: none;
-}
-/* line 122, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table tbody.md-body tr.md-row td.md-cell:first-child {
-  padding-left: 10px;
-}
-/* line 125, ../sass/_vrd_view.scss */
-expected-pick-order md-data-table-container table.md-table tbody.md-body tr.md-row td.md-cell:last-child {
-  text-align: right;
-  padding-right: 35px;
-}
-
-/* line 135, ../sass/_vrd_view.scss */
-card-filter-search {
-  color: rgba(0, 0, 0, 0.87);
+/* line 123, ../sass/_vrd_view.scss */
+expected-pick-order card-filter-search {
   display: block;
   border-bottom: 1px solid rgba(1, 1, 1, 0.2);
-  padding: 10px;
+  border-left: 1px solid rgba(1, 1, 1, 0.2);
+  padding: 0 10px;
 }
-/* line 142, ../sass/_vrd_view.scss */
-card-filter-search .filter-div {
+/* line 129, ../sass/_vrd_view.scss */
+expected-pick-order card-filter-search .filter-div {
   text-transform: capitalize;
   display: inline-block;
 }
-/* line 147, ../sass/_vrd_view.scss */
-card-filter-search .filter-options {
+/* line 134, ../sass/_vrd_view.scss */
+expected-pick-order card-filter-search .filter-options {
   max-height: 0;
+  display: none;
   opacity: 0;
   transition: all 0.25s ease-in;
 }
-/* line 153, ../sass/_vrd_view.scss */
-card-filter-search .filter-options.visible {
+/* line 141, ../sass/_vrd_view.scss */
+expected-pick-order card-filter-search .filter-options.visible {
   transition: all 0.25s ease-in;
-  max-height: 100%;
+  max-height: 600px;
+  display: block;
   overflow: auto;
   opacity: 1;
   font-size: 13px;
   color: rgba(0, 0, 0, 0.87);
 }
-/* line 163, ../sass/_vrd_view.scss */
-card-filter-search h4 {
+/* line 151, ../sass/_vrd_view.scss */
+expected-pick-order card-filter-search h4 {
   font-size: 14px;
 }
