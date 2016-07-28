@@ -1,37 +1,37 @@
 <md-dialog aria-label="Settings"  ng-cloak>
     <form name="settings">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2>Settings</h2>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="cancel()">
-                <md-icon class="light" md-svg-src="img/svg/close.svg" aria-label="Close dialog"></md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
-    
-    <md-dialog-content>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Settings</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="light" md-svg-src="img/svg/close.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        
+        <md-dialog-content>
 
-        <md-input-container layout="row" required flex>
-            <label>VRD Google Sheets Id</label>
-            <input type="text" name="sheetsID" ng-model="googleSheetsId" aria-label="Google Sheets ID" required>
-        </md-input-container>
+            <md-input-container layout="row" required flex>
+                <label>VRD Google Sheets Id</label>
+                <input type="text" name="sheetsID" ng-model="googleSheetsId" aria-label="Google Sheets ID" required>
+            </md-input-container>
+            
+            <md-input-container ng-show="!spectator" layout="row" flex>
+                <label>Seat number</label>
+                <input type="text" name="seatNum" ng-model="seatNumber" aria-label="Seat Number">
+            </md-input-container>
+            
+            <md-switch class="md-primary" ng-model="spectator" name="spectator" aria-label="Spectator" layout="row" flex>
+                Spectator
+            </md-switch>
+        </md-dialog-content>
         
-        <md-input-container ng-show="!spectator" layout="row" flex>
-            <label>Seat number</label>
-            <input type="text" name="seatNum" ng-model="seatNumber" aria-label="Seat Number">
-        </md-input-container>
-        
-        <md-switch class="md-primary" ng-model="spectator" name="spectator" aria-label="Spectator" layout="row" flex>
-            Spectator
-        </md-switch>
-    </md-dialog-content>
-    
-    <md-dialog-actions layout="row">
-        <span flex></span>
-        <md-button ng-click="save()">
-            Save
-        </md-button>
-    </md-dialog-actions>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="save()">
+                Save
+            </md-button>
+        </md-dialog-actions>
     </form>
 </md-dialog>

@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
      'myApp.header'
+    , 'myApp.google'
     , 'ngRoute'
     , 'ngMaterial'
     , 'ngAnimate'
@@ -12,19 +13,19 @@ angular.module('myApp', [
     // , 'material.svgAssetsCache'
 ])
 
-.config(['$routeProvider', function($routeProvider) {
- 	$routeProvider
-	.when('/', {
-		templateUrl: 'common/views/main.html',
-    	// controller: 'AppCtrl'
-	})
-    .otherwise({
-    	templateUrl: 'common/404.html',
-    });
+.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+
+    $routeProvider
+        .when('/login', { templateUrl: 'common/views/login.html'})
+        .when('/', { templateUrl: 'common/views/main.html'})
+        .otherwise({templateUrl: 'common/404.html'});
+    
+    $locationProvider.html5Mode({enable:true, requireBase: false});
+
 }])
 .run(function($rootScope) {
     $rootScope.google_api_key = 'AIzaSyB-9nVkiHEVV79h74o_8YMMBXMLKG1PvCY';
-
+    $rootScope.draft_player = 0;
     $rootScope.settings = {
         'seat_number': 2,
         'googleSheetsId':'1QsChUjmQrzyURwWAUtU61EziggAxuG3WO2gbXndRlKU',
@@ -227,7 +228,7 @@ angular.module('myApp', [
 
         $interval(function(){
             // console.log('Interval Trigger: '+($scope.draft_player+1)+':'+($rootScope.settings.seat_number));
-
+            $scope.draft_player = $rootScope.draft_player;
             if( ($scope.draft_player+1) != $rootScope.settings.seat_number){
                 // console.log('Not you');
                 getSheet($rootScope.settings.googleSheetsId).then(function(response){
@@ -251,6 +252,9 @@ angular.module('myApp', [
             }
         }, 5000);
 
+        $rootScope.$watch('draft_round',function(){
+            $scope.draft_round = $rootScope.draft_round;
+        })
         $rootScope.$watch('[settings.googleSheetsId, settings.seat_number]', function(){
             console.log('Watch Sheets Triggered');
             // change local settings
@@ -669,74 +673,178 @@ angular.module('myApp', [
 
 .controller('PickDialogController', ['$scope', '$rootScope', '$http', '$q', '$mdDialog', '$mdMedia', function($scope, $rootScope, $http, $q, $mdDialog, $mdMedia) {
 
-    // search function to match full text
-    // console.log($rootScope);
-    $scope.localSearch = function(str) {
-        var matches = [];
-        $rootScope.cardsNames.forEach(function(card) {
-            if (card.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) {
-                matches.push(card);
-            }
-        });
-        return matches;
-    };
+    $http.get('../client_secret.json').then(function(res){
+        // Your Client ID can be retrieved from your project in the Google
+      // Developer Console, https://console.developers.google.com
 
-    $scope.hide = function() {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function() {
-        $mdDialog.cancel();
-    };
-    $scope.submit = function(answer) {
-        var seatToSheet = ["A","B","C",'D','E','F','G','H','I','J','K'];
-        var seat = $rootScope.settings.seat_number;
-        var sheetId = $rootScope.settings.googleSheetsId;
-        var googleApiKey = $rootScope.google_api_key;
-        var sheetsRound = $rootScope.draft_round +1;
-        var sheetLocation = seatToSheet[seat]+sheetsRound;
-        console.log(googleApiKey);
-        var post_url = 'https://sheets.googleapis.com/v4/spreadsheets/'+sheetId+'/values/Sheet1!C1?valueInputOption=RAW?key='+googleApiKey;
-        var payload = {
-            majorDimension: "DIMENSION_UNSPECIFIED",
-            values:[$scope.selectedItem]
+      var CLIENT_ID = res.data.web.client_id;
+
+      var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
+
+      /**
+       * Check if current user has authorized this application.
+       */
+      function checkAuth() {
+        gapi.auth.authorize(
+          {
+            'client_id': CLIENT_ID,
+            'scope': SCOPES.join(' '),
+            'immediate': true
+          }, handleAuthResult);
+      }
+
+      function handleAuthMyResult(authResult) {
+        insertIntoSheet();
+      }
+
+      function insertIntoSheet() {
+        var discoveryUrl ='https://sheets.googleapis.com/$discovery/rest?version=v4';
+        gapi.client.load(discoveryUrl).then(insertSheet);
+      }
+
+      /**
+       * Initiate auth flow in response to user clicking authorize button.
+       * @param {Event} event Button click event.
+       */
+      $scope.handleAuthClick = function (event) {
+        gapi.auth.authorize(
+          {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+          handleAuthMyResult);
+        return false;
+      }
+
+      /**
+       * Load Sheets API client library.
+       */
+      function loadSheetsApi() {
+        var discoveryUrl ='https://sheets.googleapis.com/$discovery/rest?version=v4';
+        gapi.client.load(discoveryUrl).then(listMajors);
+      }
+
+      /**
+       * Print the names and majors of students in a sample spreadsheet:
+       * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+       */
+       
+       function insertSheet() {
+            var seatToSheet = ["A","B","C",'D','E','F','G','H','I','J','K'];
+            var seat = $rootScope.settings.seat_number;
+            var sheetId = $rootScope.settings.googleSheetsId;
+            var googleApiKey = $rootScope.google_api_key;
+            var sheetsRound = $rootScope.draft_round +1;
+            var sheetLocation = seatToSheet[seat]+sheetsRound;            
+            var post_url = 'https://sheets.googleapis.com/v4/spreadsheets/'+sheetId+'/values/Sheet1!'+sheetLocation+'?valueInputOption=USER_ENTERED';//?key='+googleApiKey;
+            var payload = {
+                range: "Sheet1!"+sheetLocation,
+                majorDimension: "ROWS",
+                values:[[$scope.selectedItem]]
+            };
+            
+
+            gapi.client.sheets.spreadsheets.values.batchUpdate({
+              spreadsheetId: sheetId,
+              valueInputOption:'USER_ENTERED',
+              data:[payload]
+              // valueRange: payload
+
+            }).then(function(response) {
+                console.log(response);
+                $mdDialog.hide('sucess');
+                // wont work if your on the wheel
+                if($rootScope.draft_round%2 == 1){
+                    $rootScope.draft_player = $rootScope.draft_player++;
+                } else {
+                    $rootScope.draft_player = $rootScope.draft_player--;
+                }
+                
+            }, function(response) {
+              appendPre('Error: ' + response.result.error.message);
+              $mdDialog.hide('Error');
+            });
+
+            console.log(gapi.client.sheets.spreadsheets.values);
+       }
+      /**
+       * Append a pre element to the body containing the given message
+       * as its text node.
+       * @param {string} message Text to be placed in pre element.
+       */
+      function appendPre(message) {
+        var pre = document.getElementById('output');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
+      }
+  
+
+        // search function to match full text
+        // console.log($rootScope);
+        $scope.localSearch = function(str) {
+            var matches = [];
+            $rootScope.cardsNames.forEach(function(card) {
+                if (card.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) {
+                    matches.push(card);
+                }
+            });
+            return matches;
         };
-        $http({
-            method: 'PUT',
-            url: post_url,
-            contentType: 'application/json',
-            authorization: 'Bearer '+googleApiKey,
-            body: payload,
-        }).success(function(response) {
-            console.log(response);
-            $mdDialog.hide(answer);
-        }).error(function(response){
-            $mdDialog.hide(answer);
-        });
-    
-        
-        // sent pick to sheets
-    };
 
-    $scope.viewCard = function(cardname){
-        $http.get('https://api.deckbrew.com/mtg/cards?name='+cardname).then(function(res){
-            if(res.data.length == 1){
-                var chosen_key =1000;
-                angular.forEach(res.data[0].editions, function(editions, key){
-                    if(editions.set != "International Collector's Edition" && editions.set != "Collector's Edition" && editions.set != "Vintage Masters"){
-                        if(chosen_key > key){
-                            $scope.cardImage = res.data[0].editions[res.data[0].editions.length-1].image_url;
-                            chosen_key = key;
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.submit = function(answer) {
+            var seatToSheet = ["A","B","C",'D','E','F','G','H','I','J','K'];
+            var seat = $rootScope.settings.seat_number;
+            var sheetId = $rootScope.settings.googleSheetsId;
+            var googleApiKey = $rootScope.google_api_key;
+            var sheetsRound = $rootScope.draft_round +1;
+            var sheetLocation = seatToSheet[seat]+sheetsRound;
+            console.log(googleApiKey);
+            var post_url = 'https://sheets.googleapis.com/v4/spreadsheets/'+sheetId+'/values/C1?valueInputOption=RAW?key='+googleApiKey;
+            var payload = {
+                majorDimension: "DIMENSION_UNSPECIFIED",
+                values:[$scope.selectedItem]
+            };
+            // $http({
+            //     method: 'PUT',
+            //     url: post_url,
+            //     contentType: 'application/json',
+            //     authorization: '4/N1-5NVx2NaVkuOImqUq-GSCvQW89kLSnx42qBovWnck',
+            //     body: payload,
+            // }).success(function(response) {
+            //     console.log(response);
+            //     $mdDialog.hide(answer);
+            // }).error(function(response){
+            //     $mdDialog.hide(answer);
+            // });
+
+            // sent pick to sheets
+        };
+
+        $scope.viewCard = function(cardname){
+            $http.get('https://api.deckbrew.com/mtg/cards?name='+cardname).then(function(res){
+                if(res.data.length == 1){
+                    var chosen_key =1000;
+                    angular.forEach(res.data[0].editions, function(editions, key){
+                        if(editions.set != "International Collector's Edition" && editions.set != "Collector's Edition" && editions.set != "Vintage Masters"){
+                            if(chosen_key > key){
+                                $scope.cardImage = res.data[0].editions[res.data[0].editions.length-1].image_url;
+                                chosen_key = key;
+                            }
                         }
-                    }
-                });
-            } else {
-                angular.forEach(res.data, function(card,key){
-                    if(card.name == cardname){
-                        $scope.cardImage = res.data[key].editions[res.data[key].editions.length-1].image_url;
-                    }
-                });
-            }
-        });
-    }
+                    });
+                } else {
+                    angular.forEach(res.data, function(card,key){
+                        if(card.name == cardname){
+                            $scope.cardImage = res.data[key].editions[res.data[key].editions.length-1].image_url;
+                        }
+                    });
+                }
+            });
+        }
 
+    });
+  
 }]);

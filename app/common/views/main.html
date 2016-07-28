@@ -18,7 +18,7 @@
 				</draft-round-number>
 				<draft-pick ng-click="viewCard(pick)" ng-repeat="(seatNumber, pick) in row track by $index" flex>
 					<div class="pick" ng-if="pick">{{pick}}</div>
-					<md-button ng-if="seatNumber+1 == settings.seat_number && !pick && key+1==draft_round && !settings.spectator" ng-click="showPickDialog($event)" style="margin:0;"> Pick </md-button>
+					<!-- <md-button ng-if="seatNumber+1 == settings.seat_number && !pick && key+1==draft_round && !settings.spectator" ng-click="showPickDialog($event)" style="margin:0;"> Pick </md-button> -->
 				</draft-pick>
 			</draft-round>
 		</draft-body>
