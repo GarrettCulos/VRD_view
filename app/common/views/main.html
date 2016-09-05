@@ -18,7 +18,7 @@
 				</draft-round-number>
 				<draft-pick ng-click="viewCard(pick)" ng-repeat="(seatNumber, pick) in row track by $index" flex>
 					<div class="pick" ng-if="pick">{{pick}}</div>
-					<!-- <md-button ng-if="seatNumber+1 == settings.seat_number && !pick && key+1==draft_round && !settings.spectator" ng-click="showPickDialog($event)" style="margin:0;"> Pick </md-button> -->
+					<md-button ng-if="seatNumber+1 == settings.seat_number && !pick && key+1==draft_round && !settings.spectator || settings.judge" ng-click="showPickDialog($event)" style="margin:0;"> Pick </md-button>
 				</draft-pick>
 			</draft-round>
 		</draft-body>
@@ -28,14 +28,14 @@
 		<card-filter-search>
 			<div ng-controller="PickDialogController">
 				<md-autocomplete md-selected-item="selectedItem" md-selected-item-change="viewCard(selectedItem)" md-search-text="searchText" md-delay="400" md-item-text="item"  md-items="item in localSearch(searchText)" style="margin-top:10px;">
-		            <md-item-template>
-		                <span md-highlight-text="searchText">{{item}}</span>
-		            </md-item-template>
-		            <md-not-found>
-		                No card matching "{{searchText}}" was found.
-		            </md-not-found>
-		        </md-autocomplete>
-	        </div>
+            <md-item-template>
+                <span md-highlight-text="searchText">{{item}}</span>
+            </md-item-template>
+            <md-not-found>
+                No card matching "{{searchText}}" was found.
+            </md-not-found>
+        </md-autocomplete>
+      </div>
 
 			</card-search>
 			<div layout="row" flex>

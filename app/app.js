@@ -121,7 +121,7 @@ angular.module('myApp', [
     $scope.draft_player = $rootScope.draft_player;
 
     // --------------------------------------------- //
-    //                  Settings Pop-up               //
+    //                 Settings Pop-up               //
     // --------------------------------------------- //
 
         // Show Settings Modal (see https://material.angularjs.org/latest/demo/dialog)
@@ -175,7 +175,7 @@ angular.module('myApp', [
         }
 
     // --------------------------------------------- //
-    //                  Pick Pop-up                   //
+    //                 Pick Pop-up                   //
     // --------------------------------------------- //
 
         // Show Settings Modal (see https://material.angularjs.org/latest/demo/dialog)
@@ -278,7 +278,6 @@ angular.module('myApp', [
                     $scope.pickList = res;
                 });
 
-
             });
         },true);
 
@@ -311,7 +310,6 @@ angular.module('myApp', [
                         }
                     });    
                 }
-                
             });
         }
 
@@ -320,8 +318,8 @@ angular.module('myApp', [
     // --------------------------------------------- //
         
         $scope.viewCard = function(cardname){
-            // var cardname = $scope.draft.picks[key1][key2];
-            $scope.cardView = $rootScope.cards.data[cardname];
+            $rootScope.cardView = $rootScope.cards.data[cardname];
+
 
             $http.get('https://api.deckbrew.com/mtg/cards?name='+cardname).then(function(res){
                 if(res.data.length == 1){
@@ -329,7 +327,7 @@ angular.module('myApp', [
                     angular.forEach(res.data[0].editions, function(editions, key){
                         if(editions.set != "International Collector's Edition" && editions.set != "Collector's Edition" && editions.set != "Vintage Masters"){
                             if(chosen_key > key){
-                                $scope.cardImage = res.data[0].editions[res.data[0].editions.length-1].image_url;
+                                $rootScope.cardImage = res.data[0].editions[res.data[0].editions.length-1].image_url;
                                 chosen_key = key;
                             }
                         }
@@ -337,7 +335,7 @@ angular.module('myApp', [
                 } else {
                     angular.forEach(res.data, function(card,key){
                         if(card.name == cardname){
-                            $scope.cardImage = res.data[key].editions[res.data[key].editions.length-1].image_url;
+                            $rootScope.cardImage = res.data[key].editions[res.data[key].editions.length-1].image_url;
                         }
                     });
                 }
@@ -674,7 +672,7 @@ angular.module('myApp', [
 .controller('PickDialogController', ['$scope', '$rootScope', '$http', '$q', '$mdDialog', '$mdMedia', function($scope, $rootScope, $http, $q, $mdDialog, $mdMedia) {
 
     $http.get('../client_secret.json').then(function(res){
-        // Your Client ID can be retrieved from your project in the Google
+      // Your Client ID can be retrieved from your project in the Google
       // Developer Console, https://console.developers.google.com
 
       var CLIENT_ID = res.data.web.client_id;
@@ -824,13 +822,15 @@ angular.module('myApp', [
         };
 
         $scope.viewCard = function(cardname){
+            $rootScope.cardView = $rootScope.cards.data[cardname];
+
             $http.get('https://api.deckbrew.com/mtg/cards?name='+cardname).then(function(res){
                 if(res.data.length == 1){
                     var chosen_key =1000;
                     angular.forEach(res.data[0].editions, function(editions, key){
                         if(editions.set != "International Collector's Edition" && editions.set != "Collector's Edition" && editions.set != "Vintage Masters"){
                             if(chosen_key > key){
-                                $scope.cardImage = res.data[0].editions[res.data[0].editions.length-1].image_url;
+                                $rootScope.cardImage = res.data[0].editions[res.data[0].editions.length-1].image_url;
                                 chosen_key = key;
                             }
                         }
@@ -838,7 +838,7 @@ angular.module('myApp', [
                 } else {
                     angular.forEach(res.data, function(card,key){
                         if(card.name == cardname){
-                            $scope.cardImage = res.data[key].editions[res.data[key].editions.length-1].image_url;
+                            $rootScope.cardImage = res.data[key].editions[res.data[key].editions.length-1].image_url;
                         }
                     });
                 }
